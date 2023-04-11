@@ -1,9 +1,6 @@
-import { Inter } from 'next/font/google'
+import './globals.css'
 import localFont from 'next/font/local'
 
-import './globals.css'
-
-const inter = Inter({ subsets: ['latin'] })
 const switzer = localFont({
   src: [
     {
@@ -28,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.className}`}>
+    <html lang="en" className={`${switzer.className}`}>
       <body>{children}</body>
     </html>
   )
