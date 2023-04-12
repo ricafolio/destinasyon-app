@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+::selection {
+  background: #ffffff40;
+}
+
+body {
+  background-color:#ffdd99;
+  background-image:
+      radial-gradient(at 93% 66%, hsla(229,68%,65%,1) 0px, transparent 50%),
+      radial-gradient(at 15% 59%, hsla(190,96%,69%,1) 0px, transparent 50%),
+      radial-gradient(at 89% 84%, hsla(103,93%,72%,1) 0px, transparent 50%),
+      radial-gradient(at 34% 19%, hsla(31,84%,65%,1) 0px, transparent 50%),
+      radial-gradient(at 59% 5%, hsla(275,76%,64%,1) 0px, transparent 50%),
+      radial-gradient(at 79% 39%, hsla(40,87%,75%,1) 0px, transparent 50%),
+      radial-gradient(at 46% 0%, hsla(133,89%,65%,1) 0px, transparent 50%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='7.4' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
