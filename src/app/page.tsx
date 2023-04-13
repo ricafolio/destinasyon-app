@@ -2,9 +2,11 @@
 
 import { useState } from "react"
 import { Toaster, toast } from "react-hot-toast"
+import { Destination as DestinationType } from "./types"
+
 import Input from "./components/Input"
 import Destination from "./components/Destination"
-import { Destination as DestinationType } from "./types"
+import Help from "./components/Help"
 
 export default function Home() {
   const [prompt, setPrompt] = useState<string>("")
@@ -91,7 +93,16 @@ export default function Home() {
         }}
       />
 
-      <h1 className="font-bold text-4xl sm:text-5xl mt-8 sm:mt-0">Tell us about your next dream trip 🏝️</h1>
+      <div className="absolute top-0 right-0 p-5">
+        <a href="https://ricafolio.me" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-gray-200 transition-colors">Built by Ricafolio.me</a>
+      </div>
+
+      <div className="absolute top-3 left-3">
+        <Help />
+      </div>
+
+      <h1 className="font-bold text-4xl sm:text-5xl mt-14 sm:mt-0">Tell us about your next dream trip 🏝️</h1>
+
       <div className="w-full py-8">
         <Input
           prompt={prompt}
