@@ -1,15 +1,12 @@
-"use client";
-
 interface InputProps {
   prompt: string
   fetching: boolean
-  onRandomBtnClick: any
-  onSubmitBtnClick: any
-  onPromptValueChange: any
+  onRandomBtnClick: () => void
+  onSubmitBtnClick: () => void
+  onPromptValueChange: (arg1: string) => void
 }
 
 export default function Input({ prompt, fetching, onRandomBtnClick, onSubmitBtnClick, onPromptValueChange }: InputProps) {
-
   return (
     <div className="flex flex-col w-full">
       <textarea
