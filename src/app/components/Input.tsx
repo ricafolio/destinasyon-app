@@ -6,7 +6,6 @@ export default function Input({ prompt, fetching, onRandomBtnClick, onSubmitBtnC
       <textarea
         name="prompt"
         placeholder="Somewhere with best island hopping experience"
-        rows={4}
         className="
           w-full text-2xl px-4 py-3 rounded-lg
           transition-colors duration-150
@@ -14,8 +13,10 @@ export default function Input({ prompt, fetching, onRandomBtnClick, onSubmitBtnC
           hover:bg-gray-50 focus:bg-white  selection:bg-black/10
           focus:border-6 focus:border-amber-500 focus:outline-none
         "
+        rows={4}
         value={prompt}
         onChange={(e) => onPromptValueChange(e.target.value, false)}
+        autoFocus={true}
       ></textarea>
 
       <div className="flex flex-col sm:flex-row sm:justify-between w-full mt-2">
