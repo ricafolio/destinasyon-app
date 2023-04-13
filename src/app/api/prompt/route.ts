@@ -1,21 +1,8 @@
 import { NextResponse } from 'next/server'
+import { ChatGPTAgent, ChatGPTMessage, PromptPayload } from "../../types"
 
 if (!process.env.GPT_API_KEY) {
   throw new Error("Missing env var from OpenAI")
-}
-
-export type ChatGPTAgent = "user" | "system"
-
-interface ChatGPTMessage {
-  role: ChatGPTAgent
-  content: string
-}
-
-interface promptPayload {
-  model: string
-  messages: ChatGPTMessage[]
-  temperature: number
-  max_tokens?: number
 }
 
 export async function POST(req: Request) {
@@ -62,7 +49,7 @@ Answer with array of objects format:
       throw new Error("No prompt in the request")
     }
 
-    const payload: promptPayload = {
+    const payload: PromptPayload = {
       model: "gpt-3.5-turbo",
       messages: [{ role: "user", content: prompt }],
       temperature: 1,

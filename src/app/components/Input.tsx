@@ -1,10 +1,4 @@
-interface InputProps {
-  prompt: string
-  fetching: boolean
-  onRandomBtnClick: () => void
-  onSubmitBtnClick: () => void
-  onPromptValueChange: (arg1: string, arg2: boolean) => void
-}
+import { InputProps } from "../types"
 
 export default function Input({ prompt, fetching, onRandomBtnClick, onSubmitBtnClick, onPromptValueChange }: InputProps) {
   return (

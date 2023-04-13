@@ -1,18 +1,6 @@
-interface Spot {
-  name: string
-  description: string
-  coordinates: string
-}
+import { Spot, DestinationProps } from "../types"
 
-interface DestinationProps {
-  name: string
-  description: string
-  coordinates: string
-  places: Spot[]
-  index: number
-}
-
-export default function Destination({name, description, coordinates, places, index}: DestinationProps) {
+export default function Destination({ name, description, coordinates, places, index }: DestinationProps) {
   return (
     <div className="border-b border-gray-800 py-6 text-left">
       <h1 className="text-2xl font-medium">
@@ -21,9 +9,9 @@ export default function Destination({name, description, coordinates, places, ind
 
       <p>{description}</p>
 
-      {places.map((spot: Spot, j: number) => {
+      {places.map((spot: Spot, i: number) => {
         return (
-          <div key={`spot-${index}-${j}`}>
+          <div key={`spot-${index}-${i}`}>
             <h2>
               {spot.name} ({spot.coordinates})
             </h2>

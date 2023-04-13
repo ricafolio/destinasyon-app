@@ -4,11 +4,12 @@ import { useState } from "react"
 import { Toaster, toast } from "react-hot-toast"
 import Input from "./components/Input"
 import Destination from "./components/Destination"
+import { Destination as DestinationType } from "./types"
 
 export default function Home() {
-  const [prompt, setPrompt] = useState("")
-  const [result, setResult] = useState([])
-  const [fetching, setFetching] = useState(false)
+  const [prompt, setPrompt] = useState<string>("")
+  const [result, setResult] = useState<DestinationType[]>([])
+  const [fetching, setFetching] = useState<boolean>(false)
 
   async function generatePlaces() {
     if (!fetching) {
