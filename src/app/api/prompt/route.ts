@@ -32,24 +32,30 @@ export async function POST(req: Request) {
     } else if (action === "submit") {
       prompt = `"${prompt}"
 
-Find me random travel destinations in the Philippines with this prompt and provide coordinates.
-Expand by giving bulleted list of best destinations inside of each places and also define why. Also provide coordinates.
+First, validate the prompt above. If it's invalid, stop now, ignore the next instructions and just reply the following code:
+{ success: false, data: null }
+
+Then, find me random travel destinations in the Philippines with that prompt and provide coordinates. Expand by giving another list of best destinations inside of each places and also define why. Also provide coordinates.
 
 Answer with array of objects format:
-[
-  {
-    name: "",
-    description: "",
-    coordinates: "",
-    places: [
-      {
-        name: "",
-        description: "",
-        coordinates: "",
-      }
-    ]
-  }
-]`
+{
+  success: true,
+  data: [
+    {
+      name: "",
+      description: "",
+      coordinates: "",
+      places: [
+        {
+          name: "",
+          description: "",
+          coordinates: "",
+        }
+      ]
+    }
+  ]
+}
+`
     }
 
     if (action === "submit" && !prompt) {
