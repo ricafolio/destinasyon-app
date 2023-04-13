@@ -75,6 +75,9 @@ export default function Home() {
       <Toaster
         position="top-center"
         reverseOrder={false}
+        containerStyle={{
+          top: 32,
+        }}
       />
       <h1 className="font-bold text-5xl">Tell us about your next trip 🏝️</h1>
       <div className="w-full py-8">
@@ -86,7 +89,7 @@ export default function Home() {
           onPromptValueChange={handlePromptValueChange}
         />
       </div>
-      {prompt === "" && <p className="block w-full p-4 text-lg text-gray-300 bg-transparent rounded border-2 border-dashed border-gray-600">
+      {result === "" && <p className="block w-full p-4 text-lg text-gray-300 bg-transparent rounded border-2 border-dashed border-gray-600">
         <b>Tip:</b> The more specific you are about your preferences, the more tailored our recommendations will be to your interests and travel style. ✨
       </p>}
     </main>
