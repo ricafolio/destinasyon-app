@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { ChatGPTAgent, ChatGPTMessage, PromptPayload } from "../../types"
+import { PromptPayload } from "../../types"
 
 if (!process.env.GPT_API_KEY) {
   throw new Error("Missing env var from OpenAI")
@@ -9,17 +9,19 @@ export async function POST(req: Request) {
   try {
     const body = await req.json()
     let { action, prompt } = body
+    let temp = 0.75
 
     if (action !== "submit" && action !== "random") {
       throw new Error("Invalid action!")
     }
 
     if (action === "random") {
-      prompt = "Randomly generate a one prompt with 1 to 2 sentences for someone's ideal place to travel based on an activity. Write in first person POV. Use modal verbs of desire. Do not specify specific name of places."
+      prompt = "Pretend you are a person thinking about your next dream trip. Randomly generate a one prompt with 1 to 2 sentences for your ideal place to travel based on an activity/food/experience. Write in first person POV. Use modal verbs of desire. Do not specify specific name of places."
+      temp = 1
     } else if (action === "submit") {
       prompt = `"${prompt}"
 
-First, validate the prompt above. If it's invalid, stop now, ignore the next instructions and just reply the following code:
+First, validate the prompt above. It's fine if the prompt is not clear, but if it's doesn't make any sense, stop now, ignore the next instructions and just reply the following code:
 { success: false, data: null }
 
 Then, find me random travel destinations in the Philippines with that prompt and provide coordinates. Expand by giving another list of best destinations inside of each places and also define why. Also provide coordinates.
@@ -52,7 +54,7 @@ Answer with array of objects format:
     const payload: PromptPayload = {
       model: "gpt-3.5-turbo",
       messages: [{ role: "user", content: prompt }],
-      temperature: 1,
+      temperature: temp,
     }
 
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
