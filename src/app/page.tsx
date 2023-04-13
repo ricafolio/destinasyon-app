@@ -11,9 +11,9 @@ export default function Home() {
   const [result, setResult] = useState<DestinationType[]>([])
   const [fetching, setFetching] = useState<boolean>(false)
 
-  async function generatePlaces() {
+  async function generateDestinations() {
     if (!fetching) {
-      const toastStatus = toast.loading('Fetching places... It could take a while.')
+      const toastStatus = toast.loading('Finding best destinations... It could take a while.')
       setFetching(true)
 
       const response = await fetch("/api/prompt", {
@@ -97,7 +97,7 @@ export default function Home() {
           prompt={prompt}
           fetching={fetching}
           onRandomBtnClick={generateRandomPrompt}
-          onSubmitBtnClick={generatePlaces}
+          onSubmitBtnClick={generateDestinations}
           onPromptValueChange={handlePromptValueChange}
         />
       </div>
