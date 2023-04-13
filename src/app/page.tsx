@@ -93,12 +93,12 @@ export default function Home() {
         }}
       />
 
-      <div className="absolute top-0 right-0 p-5">
-        <a href="https://ricafolio.me" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-gray-200 transition-colors">Built by Ricafolio.me</a>
-      </div>
-
       <div className="absolute top-3 left-3">
         <Help />
+      </div>
+
+      <div className="absolute top-0 right-0 p-5">
+        <a href="https://ricafolio.me" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-gray-200 transition-colors">Built by Ricafolio.me</a>
       </div>
 
       <h1 className="font-bold text-4xl sm:text-5xl mt-14 sm:mt-0">Tell us about your next dream trip 🏝️</h1>
