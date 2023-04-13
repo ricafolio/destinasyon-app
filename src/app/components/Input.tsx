@@ -1,66 +1,37 @@
 "use client";
 
-import { useState } from "react"
-import { Toaster, toast } from "react-hot-toast"
+interface InputProps {
+  prompt: string
+  fetching: boolean
+  onRandomBtnClick: any
+  onSubmitBtnClick: any
+  onPromptValueChange: any
+}
 
-export default function Input() {
-  const [prompt, setPrompt] = useState("")
-  const [fetching, setFetching] = useState(false)
-
-  async function generateRandomPrompt() {
-    if (!fetching) {
-      setFetching(true)
-      const toastStatus = toast.loading('Generating random prompt...');
-
-      const response = await fetch("/api/prompt", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          action: "random"
-        }),
-      })
-
-      const data = await response.json()
-
-      if (!response.ok) {
-        toast.error(data.message, { id: toastStatus })
-        return
-      }
-
-      setPrompt(data.result.choices[0].message.content)
-      toast.success('Random prompt generated!', { id: toastStatus })
-      setFetching(false)
-    }
-  }
+export default function Input({ prompt, fetching, onRandomBtnClick, onSubmitBtnClick, onPromptValueChange }: InputProps) {
 
   return (
     <div className="flex flex-col w-full">
-      <Toaster
-        position="top-center"
-        reverseOrder={false}
-      />
       <textarea
         name="prompt"
         placeholder="Somewhere with best island hopping experience"
-        rows={5}
+        rows={4}
         className="
-          w-full text-2xl pl-4 pr-4 sm:pr-48 py-3 rounded-lg
+          w-full text-2xl px-4 py-3 rounded-lg
           transition-colors duration-150
           border-2 border-white text-black
           hover:bg-gray-50 focus:bg-white  selection:bg-black/10
           focus:border-6 focus:border-amber-500 focus:outline-none
         "
         value={prompt}
-        onChange={(e) => setPrompt(e.target.value)}
+        onChange={(e) => onPromptValueChange(e.target.value)}
       ></textarea>
 
       <div className="flex flex-col sm:flex-row sm:justify-between w-full mt-2">
         <div className="flex flex-row items-center">
           <button
             className="w-1/2 flex items-center justify-center text-center rounded-lg px-8 py-2 bg-white text-black h-full transition-colors duration-150 hover:bg-slate-100 active:bg-slate-200 focus:bg-slate-50"
-            onClick={generateRandomPrompt}
+            onClick={onRandomBtnClick}
             disabled={fetching}
           >
             <span className="rotate-45">
@@ -70,7 +41,7 @@ export default function Input() {
           </button>
           <button
             className="w-1/2 bg-white text-black text-xl rounded-lg px-8 py-2 transition-colors duration-150 hover:bg-slate-100 active:bg-slate-200 focus:bg-slate-50 h-full ml-2"
-            onClick={() => setPrompt("")}
+            onClick={() => onPromptValueChange("")}
           >
             Clear
           </button>
@@ -78,6 +49,7 @@ export default function Input() {
 
         <button
           className="rounded-lg px-8 py-2 mt-2 sm:mt-0 text-xl h-full transition-colors duration-150 focus:outline-6 focus:outline-amber-500 bg-amber-400 text-black hover:bg-amber-500 active:bg-amber-400 focus:bg-amber-500"
+          onClick={onSubmitBtnClick}
           disabled={fetching}
         >
           Submit
