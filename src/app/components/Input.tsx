@@ -5,29 +5,34 @@ import { Toaster, toast } from "react-hot-toast"
 
 export default function Input() {
   const [prompt, setPrompt] = useState("")
+  const [fetching, setFetching] = useState(false)
 
   async function generateRandomPrompt() {
-    const toastStatus = toast.loading('Generating random prompt...');
+    if (!fetching) {
+      setFetching(true)
+      const toastStatus = toast.loading('Generating random prompt...');
 
-    const response = await fetch("/api/prompt", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        action: "random"
-      }),
-    })
+      const response = await fetch("/api/prompt", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          action: "random"
+        }),
+      })
 
-    const data = await response.json()
+      const data = await response.json()
 
-    if (!response.ok) {
-      toast.error(data.message, { id: toastStatus })
-      return
+      if (!response.ok) {
+        toast.error(data.message, { id: toastStatus })
+        return
+      }
+
+      setPrompt(data.result.choices[0].message.content)
+      toast.success('Random prompt generated!', { id: toastStatus })
+      setFetching(false)
     }
-
-    setPrompt(data.result.choices[0].message.content)
-    toast.success('Random prompt generated!', { id: toastStatus })
   }
 
   return (
@@ -54,10 +59,9 @@ export default function Input() {
       <div className="flex flex-col sm:flex-row sm:justify-between w-full mt-2">
         <div className="flex flex-row items-center">
           <button
-            className="w-1/2 flex items-center justify-center text-center
-              rounded-lg px-8 py-2 bg-white text-black h-full
-              transition-colors duration-150 hover:bg-slate-100 active:bg-slate-200 focus:bg-slate-50"
+            className="w-1/2 flex items-center justify-center text-center rounded-lg px-8 py-2 bg-white text-black h-full transition-colors duration-150 hover:bg-slate-100 active:bg-slate-200 focus:bg-slate-50"
             onClick={generateRandomPrompt}
+            disabled={fetching}
           >
             <span className="rotate-45">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><g fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><path d="M0 0h24v24H0z"/><path fill="#000" d="M18.333 2c1.96 0 3.56 1.537 3.662 3.472l.005.195v12.666c0 1.96-1.537 3.56-3.472 3.662l-.195.005H5.667a3.667 3.667 0 0 1-3.662-3.472L2 18.333V5.667c0-1.96 1.537-3.56 3.472-3.662L5.667 2h12.666zM15.5 14a1.5 1.5 0 1 0 0 3a1.5 1.5 0 0 0 0-3zm-7 0a1.5 1.5 0 1 0 0 3a1.5 1.5 0 0 0 0-3zm0-7a1.5 1.5 0 1 0 0 3a1.5 1.5 0 0 0 0-3zm7 0a1.5 1.5 0 1 0 0 3a1.5 1.5 0 0 0 0-3z"/></g></svg>
@@ -72,13 +76,10 @@ export default function Input() {
           </button>
         </div>
 
-        <button className="
-          rounded-lg px-8 py-2 mt-2 sm:mt-0 text-xl h-full
-          transition-colors duration-150
-          focus:outline-6 focus:outline-amber-500
-          bg-amber-400 text-black
-          hover:bg-amber-500 active:bg-amber-400 focus:bg-amber-500
-        ">
+        <button
+          className="rounded-lg px-8 py-2 mt-2 sm:mt-0 text-xl h-full transition-colors duration-150 focus:outline-6 focus:outline-amber-500 bg-amber-400 text-black hover:bg-amber-500 active:bg-amber-400 focus:bg-amber-500"
+          disabled={fetching}
+        >
           Submit
         </button>
       </div>
