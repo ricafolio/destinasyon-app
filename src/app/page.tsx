@@ -66,8 +66,9 @@ export default function Home() {
     }
   }
 
-  function handlePromptValueChange(value: string) {
+  function handlePromptValueChange(value: string, clear: boolean) {
     setPrompt(value)
+    if(clear) toast.success('Cleared')
   }
 
   return (

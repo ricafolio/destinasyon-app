@@ -3,7 +3,7 @@ interface InputProps {
   fetching: boolean
   onRandomBtnClick: () => void
   onSubmitBtnClick: () => void
-  onPromptValueChange: (arg1: string) => void
+  onPromptValueChange: (arg1: string, arg2: boolean) => void
 }
 
 export default function Input({ prompt, fetching, onRandomBtnClick, onSubmitBtnClick, onPromptValueChange }: InputProps) {
@@ -21,7 +21,7 @@ export default function Input({ prompt, fetching, onRandomBtnClick, onSubmitBtnC
           focus:border-6 focus:border-amber-500 focus:outline-none
         "
         value={prompt}
-        onChange={(e) => onPromptValueChange(e.target.value)}
+        onChange={(e) => onPromptValueChange(e.target.value, false)}
       ></textarea>
 
       <div className="flex flex-col sm:flex-row sm:justify-between w-full mt-2">
@@ -38,7 +38,7 @@ export default function Input({ prompt, fetching, onRandomBtnClick, onSubmitBtnC
           </button>
           <button
             className="w-1/2 bg-white text-black text-xl rounded-lg px-8 py-2 transition-colors duration-150 hover:bg-slate-100 active:bg-slate-200 focus:bg-slate-50 h-full ml-2"
-            onClick={() => onPromptValueChange("")}
+            onClick={() => onPromptValueChange("", true)}
           >
             Clear
           </button>
