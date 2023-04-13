@@ -1,16 +1,46 @@
 "use client";
 
 import { useState } from "react"
+import { Toaster, toast } from "react-hot-toast"
 
 export default function Input() {
   const [prompt, setPrompt] = useState("")
 
+  async function generateRandomPrompt() {
+    const toastStatus = toast.loading('Generating random prompt...');
+
+    const response = await fetch("/api/prompt", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        action: "random"
+      }),
+    })
+
+    const data = await response.json()
+
+    if (!response.ok) {
+      toast.error(data.message, { id: toastStatus })
+      return
+    }
+
+    setPrompt(data.result.choices[0].message.content)
+    toast.success('Random prompt generated!', { id: toastStatus })
+  }
+
   return (
     <div className="flex flex-col sm:flex-row w-full relative">
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+        toastOptions={{ duration: 2000 }}
+      />
       <textarea
         name="prompt"
         placeholder="Somewhere with best island hopping experience"
-        rows={4}
+        rows={6}
         className="
           w-full text-2xl pl-4 pr-4 sm:pr-48 py-3 rounded-lg
           transition-colors duration-150
@@ -39,6 +69,7 @@ export default function Input() {
             border-2 border-gray-200 hover:border-gray-400
           active:bg-slate-200 focus:bg-slate-50
           "
+          onClick={generateRandomPrompt}
         >
           <span className="rotate-45">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><g fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><path d="M0 0h24v24H0z"/><path fill="#000" d="M18.333 2c1.96 0 3.56 1.537 3.662 3.472l.005.195v12.666c0 1.96-1.537 3.56-3.472 3.662l-.195.005H5.667a3.667 3.667 0 0 1-3.662-3.472L2 18.333V5.667c0-1.96 1.537-3.56 3.472-3.662L5.667 2h12.666zM15.5 14a1.5 1.5 0 1 0 0 3a1.5 1.5 0 0 0 0-3zm-7 0a1.5 1.5 0 1 0 0 3a1.5 1.5 0 0 0 0-3zm0-7a1.5 1.5 0 1 0 0 3a1.5 1.5 0 0 0 0-3zm7 0a1.5 1.5 0 1 0 0 3a1.5 1.5 0 0 0 0-3z"/></g></svg>
