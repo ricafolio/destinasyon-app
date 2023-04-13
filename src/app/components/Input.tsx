@@ -21,7 +21,7 @@ export default function Input({ prompt, fetching, onRandomBtnClick, onSubmitBtnC
       <div className="flex flex-col sm:flex-row sm:justify-between w-full mt-2">
         <div className="flex flex-row items-center">
           <button
-            className="w-1/2 flex items-center justify-center text-center rounded-lg px-8 py-2 bg-white text-black h-full transition-colors duration-150 hover:bg-slate-100 active:bg-slate-200 focus:bg-slate-50"
+            className="w-1/2 flex items-center justify-center text-center rounded-lg px-8 py-2 bg-white text-black h-full transition-colors duration-150 hover:bg-slate-100 active:bg-slate-200 focus:bg-slate-50 disabled:cursor-wait"
             onClick={onRandomBtnClick}
             disabled={fetching}
           >
@@ -39,11 +39,11 @@ export default function Input({ prompt, fetching, onRandomBtnClick, onSubmitBtnC
         </div>
 
         <button
-          className="rounded-lg px-8 py-2 mt-2 sm:mt-0 text-xl h-full transition-colors duration-150 focus:outline-6 focus:outline-amber-500 bg-amber-400 text-black hover:bg-amber-500 active:bg-amber-400 focus:bg-amber-500"
+          className="rounded-lg px-8 py-2 mt-2 sm:ml-2 sm:mt-0 text-xl h-full transition-colors duration-150 focus:outline-6  disabled:cursor-wait focus:outline-amber-500 bg-amber-400 text-black hover:bg-amber-500 active:bg-amber-400 focus:bg-amber-500"
           onClick={onSubmitBtnClick}
           disabled={fetching}
         >
-          Submit
+          Get destinations
         </button>
       </div>
     </div>

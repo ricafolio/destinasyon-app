@@ -82,7 +82,7 @@ export default function Home() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center text-center p-4 sm:p-24 pt-12 sm:pt-36 m-3 rounded-xl bg-gradient-to-b from-zinc-900 to-zinc-800 text-white">
+    <main className="flex min-h-screen flex-col items-center text-center p-4 sm:p-24 pt-12 sm:pt-36 m-3 rounded-xl bg-gradient-to-b from-zinc-900 to-zinc-800 text-white relative">
       <Toaster
         position="top-center"
         reverseOrder={false}
@@ -90,7 +90,8 @@ export default function Home() {
           top: 32,
         }}
       />
-      <h1 className="font-bold text-4xl sm:text-5xl mt-8 sm:mt-0">Tell us about your next trip 🏝️</h1>
+
+      <h1 className="font-bold text-4xl sm:text-5xl mt-8 sm:mt-0">Tell us about your next dream trip 🏝️</h1>
       <div className="w-full py-8">
         <Input
           prompt={prompt}
@@ -100,10 +101,13 @@ export default function Home() {
           onPromptValueChange={handlePromptValueChange}
         />
       </div>
-      <p className="block w-full p-4 text-lg text-gray-300 bg-transparent rounded border-2 border-dashed border-gray-600">
+
+      {(result.length === 0) && <p className="block w-full p-4 text-lg text-gray-300 bg-transparent rounded border-2 border-dashed border-gray-600">
         <b>Tip:</b> The more specific you are about your preferences, the more tailored our recommendations will be to your interests and travel style. ✨
-      </p>
-      <div className="w-full py-8 bg-zinc-900 rounded-xl mt-4 px-4">
+      </p>}
+
+      <div className="w-full rounded-xl mt-4">
+        {result.length > 0 && <h2 className="font-bold text-3xl sm:text-4xl mt-8 mb-8">Check out these destinations!</h2>}
         {result?.map((destination, i) => {
           return (
             <Destination
