@@ -1,29 +1,7 @@
 import './globals.css'
 import Link from 'next/link';
-import localFont from 'next/font/local'
 import NavLink from "./components/NavLink"
-
-const switzer = localFont({
-  src: [
-    {
-      path: './fonts/Switzer/Switzer-Regular.woff2',
-      weight: '400',
-    },
-    {
-      path: './fonts/Switzer/Switzer-Medium.woff2',
-      weight: '500',
-    }
-  ]
-})
-
-const erode = localFont({
-  src: [
-    {
-      path: './fonts/Erode/Erode-Bold.woff2',
-      weight: '800',
-    }
-  ]
-})
+import { switzer, erode } from './fonts'
 
 export const metadata = {
   title: 'Destinasyon | Travel Recommendations in the Philippines',
