@@ -6,7 +6,6 @@ import { Destination as DestinationType } from "./types"
 
 import Input from "./components/Input"
 import Destination from "./components/Destination"
-import Help from "./components/Help"
 
 export default function Home() {
   const [prompt, setPrompt] = useState<string>("")
@@ -84,7 +83,7 @@ export default function Home() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center text-center p-4 sm:p-24 pt-12 sm:pt-36 m-3 rounded-xl bg-gradient-to-b from-zinc-900 to-zinc-800 text-white relative">
+    <main className="flex flex-col items-center text-center text-white p-4 sm:p-12 md:p-24 pt-12 sm:pt-24">
       <Toaster
         position="top-center"
         reverseOrder={false}
@@ -92,14 +91,6 @@ export default function Home() {
           top: 32,
         }}
       />
-
-      <div className="absolute top-3 left-3">
-        <Help />
-      </div>
-
-      <div className="absolute top-0 right-0 p-5">
-        <a href="https://ricafolio.me" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-gray-200 transition-colors">Built by Ricafolio.me</a>
-      </div>
 
       <h1 className="font-bold text-4xl sm:text-5xl mt-14 sm:mt-0">Tell us about your next dream trip 🏝️</h1>
 
