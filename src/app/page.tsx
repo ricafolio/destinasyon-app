@@ -11,7 +11,7 @@ export default function Home() {
   const [prompt, setPrompt] = useState<string>("")
   const [result, setResult] = useState<DestinationType[]>([])
   const [fetching, setFetching] = useState<boolean>(false)
-  const resultsRef = useRef<HTMLLinkElement>(null)
+  const resultsRef = useRef<HTMLIFrameElement>(null)
 
   async function generateDestinations() {
     if (!fetching) {
@@ -125,7 +125,7 @@ This might take a while.`)
         position="top-center"
         reverseOrder={false}
         containerStyle={{
-          top: 32,
+          top: 28,
         }}
       />
 
