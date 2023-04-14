@@ -8,8 +8,12 @@ import DestinationSaved from "../components/DestinationSaved"
 
 export default function MySavedDestinations() {
   const [places, setPlaces] = useState<StoredPlaces[]>(() => {
-    const stored_places = localStorage.getItem("places")
-    return stored_places !== null ? JSON.parse(stored_places) : []
+    if (typeof window !== "undefined") {
+      const stored_places = localStorage.getItem("places")
+      return stored_places !== null ? JSON.parse(stored_places) : []
+    } else {
+      return[]
+    }
   })
 
   useEffect(() => {

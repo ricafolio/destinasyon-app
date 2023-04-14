@@ -13,8 +13,12 @@ export default function Home() {
   const [fetching, setFetching] = useState<boolean>(false)
   const resultsRef = useRef<HTMLIFrameElement>(null)
   const [places, setPlaces] = useState<StoredPlaces[]>(() => {
-    const stored_places = localStorage.getItem("places")
-    return stored_places !== null ? JSON.parse(stored_places) : []
+    if (typeof window !== "undefined") {
+      const stored_places = localStorage.getItem("places")
+      return stored_places !== null ? JSON.parse(stored_places) : []
+    } else {
+      return[]
+    }
   })
 
   useEffect(() => {
