@@ -59,6 +59,11 @@ export interface DestinationProps extends Destination {
   onSaveBtnClick: (arg1: string, arg2: string, arg3: string, arg4: string) => void
 }
 
+export interface DestinationSavedProps extends StoredPlaces {
+  id: number
+  onDeleteBtnClick: (arg1: number, arg2: string) => void
+}
+
 export interface InputProps {
   prompt: string
   fetching: boolean
