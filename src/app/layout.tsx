@@ -28,17 +28,17 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${switzer.className}`}>
       <body className="relative">
-        <div className="flex min-h-screen flex-col justify-between rounded-xl bg-gradient-to-b from-zinc-900 to-zinc-800 m-3">
+        <div className="flex min-h-screen flex-col justify-between rounded-xl bg-gradient-to-b from-zinc-900 to-zinc-800 m-2 sm:m-3">
           <header className="flex p-4">
-            <div className="w-2/6 sm:w-2/3 pr-2 sm:pr-0">
+            <div className="w-2/6 sm:w-1/3 pr-2 sm:pr-0">
               <NavLink id="help" name="Help" link="/help" />
             </div>
 
-            <div className="hidden sm:w-2/3 flex justify-center">
-              {/* Destinasyon */}
+            <div className="hidden sm:inline-flex sm:w-1/3 items-center justify-center">
+              <span className="font-bold">Destinasyon AI</span>
             </div>
 
-            <div className="w-4/6 sm:w-2/3 flex justify-end">
+            <div className="w-4/6 sm:w-1/3 flex justify-end">
               <NavLink id="saved" name="My saved destinations" link="/saved-destinations" />
             </div>
           </header>

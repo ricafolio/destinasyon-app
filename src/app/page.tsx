@@ -126,7 +126,7 @@ This might take a while.`)
         }}
       />
 
-      <h1 className="font-bold text-4xl sm:text-5xl mt-14 sm:mt-0">Tell us about your next dream trip 🏝️</h1>
+      <h1 className="font-bold text-4xl sm:text-5xl mt-8 sm:mt-0">Tell us about your next dream trip 🏝️</h1>
 
       <div className="w-full py-8">
         <Input
@@ -138,7 +138,7 @@ This might take a while.`)
         />
       </div>
 
-      {(result.length === 0) && <p className="block w-full p-4 text-lg text-gray-300 bg-transparent rounded border-2 border-dashed border-gray-600">
+      {(result.length === 0) && <p className="block w-full p-4 text-base sm:text-lg text-gray-300 bg-transparent rounded border-2 border-dashed border-gray-600">
         <b>Tip:</b> The more specific you are about your preferences, the more tailored our recommendations will be to your interests and travel style. ✨
       </p>}
 
