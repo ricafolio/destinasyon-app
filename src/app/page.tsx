@@ -151,7 +151,7 @@ This might take a while.`)
         }}
       />
 
-      <h1 className="font-bold text-4xl sm:text-5xl">Tell us about your next dream trip 🏝️</h1>
+      <h1 className="font-bold text-4xl sm:text-5xl">Tell us about your dream trip 🏝️</h1>
 
       <div className="w-full pt-6 pb-3">
         <Input
