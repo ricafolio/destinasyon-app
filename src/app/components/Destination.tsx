@@ -1,8 +1,30 @@
+import { useState, useEffect } from "react"
 import { Spot, DestinationProps } from "../types"
 import Image from "next/image"
 
 export default function Destination({ name, description, spots, index, onSaveBtnClick }: DestinationProps) {
+  const [updatedSpots, setUpdatedSpots] = useState<Spot[]>([])
 
+  useEffect(() => {
+    const fetchImageUrl = async (theSpot: Spot) => {
+      try {
+        const response = await fetch(`/api/image?query=${theSpot.name}`)
+        const data = await response.json()
+        // pray
+        const newSpot = {
+          name: theSpot.name,
+          description: theSpot.description,
+          image: data.url
+        }
+        setUpdatedSpots(prevSpot => [...prevSpot, newSpot])
+      } catch (e) {
+        console.error(e)
+      }
+    }
+
+    // call the fetchImageUrl function for each location object with a null image
+    spots.filter(spot => !spot.image).forEach(fetchImageUrl)
+  }, [spots])
 
   return (
     <div className="bg-white text-black selection:bg-black/10 rounded-lg px-4 pt-4 pb-6 mb-6 text-left">
@@ -15,14 +37,12 @@ export default function Destination({ name, description, spots, index, onSaveBtn
       </p>
 
       <div className="flex flex-row flex-wrap">
-        {spots.map((spot: Spot, i: number) => {
-          const temp_image = `https://picsum.photos/seed/${index}_${i}/500/500`
-
+        {updatedSpots.map((spot: Spot, i: number) => {
           return (
             <div className="w-full md:w-2/6 pr-2 flex flex-col" key={`spot-${index}-${i}`}>
               <div>
                 <Image
-                  src={temp_image}
+                  src={spot.image}
                   alt={spot.name}
                   width="60"
                   height="60"
@@ -37,7 +57,7 @@ export default function Destination({ name, description, spots, index, onSaveBtn
               </div>
 
               <div className="my-2">
-                <button className="bg-black hover:bg-zinc-800 text-white px-5 py-3 rounded transition-colors inline-flex items-center justify-center" onClick={() => onSaveBtnClick(spot.name, name, spot.description, temp_image)}>
+                <button className="bg-black hover:bg-zinc-800 text-white px-5 py-3 rounded transition-colors inline-flex items-center justify-center" onClick={() => onSaveBtnClick(spot.name, name, spot.description, spot.image)}>
                   <svg xmlns="http://www.w3.org/2000/svg" className="mr-2" width="1em" height="1em" viewBox="0 0 15 15"><path fill="currentColor" fillRule="evenodd" d="M8 2.75a.5.5 0 0 0-1 0V7H2.75a.5.5 0 0 0 0 1H7v4.25a.5.5 0 0 0 1 0V8h4.25a.5.5 0 0 0 0-1H8V2.75Z" clipRule="evenodd"></path></svg>
                   Save location
                 </button>
