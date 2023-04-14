@@ -14,7 +14,8 @@ export default function Home() {
 
   async function generateDestinations() {
     if (!fetching) {
-      const toastStatus = toast.loading('Finding best destinations... It could take a while.')
+      const toastStatus = toast.loading(`Finding best destinations for you...
+This might take a while.`)
       setFetching(true)
 
       const response = await fetch("/api/prompt", {
