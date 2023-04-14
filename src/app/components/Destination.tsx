@@ -23,7 +23,9 @@ export default function Destination({ name, description, spots, index, onSaveBtn
     }
 
     // call the fetchImageUrl function for each location object with a null image
-    spots.filter(spot => !spot.image).forEach(fetchImageUrl)
+    spots.map((spot) => {
+      fetchImageUrl(spot)
+    })
   }, [spots])
 
   return (
@@ -41,7 +43,7 @@ export default function Destination({ name, description, spots, index, onSaveBtn
           return (
             <div className="w-full md:w-2/6 pr-2 flex flex-col" key={`spot-${index}-${i}`}>
               <div>
-                <div className="w-full h-48 relative mb-2">
+                <div className="w-full h-48 relative mb-2 bg-gray-100 rounded-md">
                   <Image
                     src={spot.image}
                     alt={spot.name}
