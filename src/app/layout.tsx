@@ -1,5 +1,6 @@
 import './globals.css'
 import localFont from 'next/font/local'
+import NavLink from "./components/NavLink"
 
 const switzer = localFont({
   src: [
