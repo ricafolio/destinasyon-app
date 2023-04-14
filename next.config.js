@@ -7,12 +7,8 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'picsum.photos'
-      },
-      {
-        protocol: 'https',
-        hostname: 'maps.googleapis.com'
-      },
+        hostname: '**.googleusercontent.com'
+      }
     ],
   },
 }
