@@ -5,9 +5,17 @@ export default function DestinationSaved({ id, name, description, image, at, onD
   return (
     <div className="w-[calc(50%_-_8px)] lg:w-[calc(25%_-_8px)] flex flex-col items-start rounded-md bg-white text-black relative group" key={`saved-spot-${id}`}>
       <div className="text-left">
-        <Image src={image} alt={name} width="60" height="60" className="w-full rounded-md transition duration-300 ease-in-out hover:brightness-90 rounded-b-none" />
+        <div className="w-full h-48 relative bg-gray-100 rounded-md">
+          <Image
+            src={image} 
+            alt={name} 
+            fill={true}
+            style={{ objectFit: "cover" }}
+            className="w-full rounded-md transition duration-300 ease-in-out hover:brightness-90 rounded-b-none" 
+          />
+        </div>
         <div className="text-left pt-2 pb-4 px-3">
-          <small className="font-bold text-orange-600">{at}</small>
+          <small className="font-bold text-orange-600 uppercase">{at}</small>
           <h2 className="text-xl font-semibold">{name}</h2>
           <p className="text-gray-700 mt-1 mb-2 md:mb-0 sm:pr-2">{description}</p>
         </div>
