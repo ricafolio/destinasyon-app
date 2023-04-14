@@ -41,13 +41,15 @@ export default function Destination({ name, description, spots, index, onSaveBtn
           return (
             <div className="w-full md:w-2/6 pr-2 flex flex-col" key={`spot-${index}-${i}`}>
               <div>
-                <Image
-                  src={spot.image}
-                  alt={spot.name}
-                  width="60"
-                  height="60"
-                  className="w-full rounded-md transition duration-300 ease-in-out hover:brightness-90 mb-2"
-                />
+                <div className="w-full h-48 relative mb-2">
+                  <Image
+                    src={spot.image}
+                    alt={spot.name}
+                    fill={true}
+                    style={{ objectFit: "cover" }}
+                    className="w-full rounded-md transition duration-300 ease-in-out hover:brightness-90"
+                  />
+                </div>
                 <h2 className="text-xl font-semibold">
                   {spot.name}
                 </h2>
