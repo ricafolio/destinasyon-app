@@ -13,7 +13,8 @@ export default function Home() {
   const [fetching, setFetching] = useState<boolean>(false)
   const resultsRef = useRef<HTMLIFrameElement>(null)
   const [places, setPlaces] = useState<StoredPlaces[]>(() => {
-    return localStorage.getItem("places") !== null ? JSON.parse(localStorage.getItem("places")) : []
+    const stored_places = localStorage.getItem("places")
+    return stored_places !== null ? JSON.parse(stored_places) : []
   })
 
   useEffect(() => {
@@ -126,10 +127,12 @@ This might take a while.`)
     if(clear) toast.success('Cleared')
   }
 
-  function handleSaveBtnClick(name: string, description: string, image: string) {
+  function handleSaveBtnClick(name: string, at: string, description: string, image: string) {
     setPlaces([
-      ...places, 
+      ...places,
       {
+        id: places.length + 1,
+        at: at,
         name: name,
         description: description,
         image: image

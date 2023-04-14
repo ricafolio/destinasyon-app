@@ -36,7 +36,7 @@ export default function Destination({ name, description, coordinates, spots, ind
               </div>
 
               <div className="my-2">
-                <button className="bg-black hover:bg-zinc-800 text-white px-5 py-3 rounded transition-colors inline-flex items-center justify-center" onClick={() => onSaveBtnClick(spot.name, spot.description, temp_image)}>
+                <button className="bg-black hover:bg-zinc-800 text-white px-5 py-3 rounded transition-colors inline-flex items-center justify-center" onClick={() => onSaveBtnClick(spot.name, name, spot.description, temp_image)}>
                   <svg xmlns="http://www.w3.org/2000/svg" className="mr-2" width="1em" height="1em" viewBox="0 0 15 15"><path fill="currentColor" fillRule="evenodd" d="M8 2.75a.5.5 0 0 0-1 0V7H2.75a.5.5 0 0 0 0 1H7v4.25a.5.5 0 0 0 1 0V8h4.25a.5.5 0 0 0 0-1H8V2.75Z" clipRule="evenodd"></path></svg>
                   Save location
                 </button>

@@ -45,6 +45,8 @@ export interface Destination {
 }
 
 export interface StoredPlaces {
+  id: number
+  at: string
   name: string
   description: string
   image: string
@@ -54,7 +56,7 @@ export interface StoredPlaces {
 
 export interface DestinationProps extends Destination {
   index: number
-  onSaveBtnClick: (arg1: string, arg2: string, arg3: string) => void
+  onSaveBtnClick: (arg1: string, arg2: string, arg3: string, arg4: string) => void
 }
 
 export interface InputProps {
