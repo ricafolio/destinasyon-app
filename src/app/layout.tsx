@@ -23,7 +23,7 @@ export default function RootLayout({
             </div>
 
             <div className="w-full sm:w-1/3 order-1 sm:order-2 mb-2 sm:mb-0 flex items-center justify-center h-auto">
-              <Link href="/" className={`text-2xl text-white hover:text-zinc-200 transition-colors duration-300 font-bold select-none cursor-pointer ${erode.className}`}>Destinasyon.app</Link>
+              <Link href="/" className={`text-2xl text-white transition-all duration-300 font-bold select-none cursor-pointer ${erode.className} inline-block text-transparent  bg-clip-text bg-gradient-to-r from-yellow-200 via-red-300 via-amber-300 to-purple-500 hover:brightness-90`}>Destinasyon.app</Link>
             </div>
 
             <div className="w-4/6 sm:w-1/3 order-3 flex justify-end">
