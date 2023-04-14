@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useRef } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Toaster, toast } from "react-hot-toast"
-import { Destination as DestinationType } from "./types"
+import { Destination as DestinationType, StoredPlaces } from "./types"
 
 import Input from "./components/Input"
 import Destination from "./components/Destination"
@@ -12,6 +12,13 @@ export default function Home() {
   const [result, setResult] = useState<DestinationType[]>([])
   const [fetching, setFetching] = useState<boolean>(false)
   const resultsRef = useRef<HTMLIFrameElement>(null)
+  const [places, setPlaces] = useState<StoredPlaces[]>(() => {
+    return localStorage.getItem("places") !== null ? JSON.parse(localStorage.getItem("places")) : []
+  })
+
+  useEffect(() => {
+    localStorage.setItem("places", JSON.stringify(places))
+  }, [places])
 
   async function generateDestinations() {
     if (!fetching) {
@@ -119,6 +126,18 @@ This might take a while.`)
     if(clear) toast.success('Cleared')
   }
 
+  function handleSaveBtnClick(name: string, description: string, image: string) {
+    setPlaces([
+      ...places, 
+      {
+        name: name,
+        description: description,
+        image: image
+      }
+    ])
+    toast.success(`${name} saved.`)
+  }
+
   return (
     <main className="flex flex-col items-center text-center text-white p-4 sm:p-12 md:p-24 pt-12 sm:pt-24">
       <Toaster
@@ -156,6 +175,7 @@ This might take a while.`)
               spots={destination.spots}
               index={i}
               key={`destination-${i}`}
+              onSaveBtnClick={handleSaveBtnClick}
             />
           )
         })}

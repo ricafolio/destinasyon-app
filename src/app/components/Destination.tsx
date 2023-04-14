@@ -1,7 +1,8 @@
 import { Spot, DestinationProps } from "../types"
 import Image from "next/image"
 
-export default function Destination({ name, description, coordinates, spots, index }: DestinationProps) {
+export default function Destination({ name, description, coordinates, spots, index, onSaveBtnClick }: DestinationProps) {
+
   return (
     <div className="bg-white text-black selection:bg-black/10 rounded-lg px-4 pt-4 pb-6 mb-6 text-left">
       <h1 className="text-3xl font-bold">
@@ -14,21 +15,32 @@ export default function Destination({ name, description, coordinates, spots, ind
 
       <div className="flex flex-row flex-wrap">
         {spots.map((spot: Spot, i: number) => {
+          const temp_image = `https://picsum.photos/seed/${index}_${i}/500/500`
+
           return (
-            <div className="w-full md:w-2/6 pr-2" key={`spot-${index}-${i}`}>
-              <Image
-                src={`https://picsum.photos/seed/${index}_${i}/500/500`}
-                alt={spot.name}
-                width="60"
-                height="60"
-                className="w-full rounded-md transition duration-300 ease-in-out hover:brightness-90 mb-2"
-              />
-              <h2 className="text-xl font-semibold">
-                {spot.name}
-              </h2>
-              <p className="text-gray-700 mt-1 mb-2 md:mb-0 sm:pr-4">
-                {spot.description}
-              </p>
+            <div className="w-full md:w-2/6 pr-2 flex flex-col" key={`spot-${index}-${i}`}>
+              <div>
+                <Image
+                  src={temp_image}
+                  alt={spot.name}
+                  width="60"
+                  height="60"
+                  className="w-full rounded-md transition duration-300 ease-in-out hover:brightness-90 mb-2"
+                />
+                <h2 className="text-xl font-semibold">
+                  {spot.name}
+                </h2>
+                <p className="text-gray-700 mt-1 mb-2 md:mb-0 sm:pr-4">
+                  {spot.description}
+                </p>
+              </div>
+
+              <div className="my-2">
+                <button className="bg-black hover:bg-zinc-800 text-white px-5 py-3 rounded transition-colors inline-flex items-center justify-center" onClick={() => onSaveBtnClick(spot.name, spot.description, temp_image)}>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="mr-2" width="1em" height="1em" viewBox="0 0 15 15"><path fill="currentColor" fillRule="evenodd" d="M8 2.75a.5.5 0 0 0-1 0V7H2.75a.5.5 0 0 0 0 1H7v4.25a.5.5 0 0 0 1 0V8h4.25a.5.5 0 0 0 0-1H8V2.75Z" clipRule="evenodd"></path></svg>
+                  Save location
+                </button>
+              </div>
             </div>
           )
         })}

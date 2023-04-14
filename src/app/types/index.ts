@@ -44,10 +44,17 @@ export interface Destination {
   spots: Spot[]
 }
 
+export interface StoredPlaces {
+  name: string
+  description: string
+  image: string
+}
+
 // ------
 
 export interface DestinationProps extends Destination {
   index: number
+  onSaveBtnClick: (arg1: string, arg2: string, arg3: string) => void
 }
 
 export interface InputProps {
