@@ -8,7 +8,7 @@ if (!process.env.GPT_API_KEY) {
 export async function POST(req: Request) {
   try {
     let { action, prompt }: FormBodyContent = await req.json()
-    let s_temp: number = 0.80
+    let s_temp: number = 0.70
     let s_role: ChatGPTAgent = "system"
 
     if (action !== "submit" && action !== "random") {
@@ -16,7 +16,7 @@ export async function POST(req: Request) {
     }
 
     if (action === "random") {
-      s_temp = 0.5
+      s_temp = 1
       prompt = `You are thinking about your next dream trip.
 
       Pick one random unusual outdoor activity. Pick random location between Luzon, Visayas or Mindanao.
@@ -38,7 +38,7 @@ If the conditions are unmet, stop completely. Just reply the following code:
 
 3. Expand by giving another list of best spots inside each destinations. Give me three spots. Convince me why it's perfect based on my input.
 
-Answer with array of objects format, just keep the image attribute null:
+Answer with array of objects format only! Just keep the image attribute null:
 {
   success: true,
   data: [
