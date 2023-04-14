@@ -11,7 +11,7 @@ export default function Input({ prompt, fetching, onRandomBtnClick, onSubmitBtnC
           transition-colors duration-150
           border-2 border-white text-black
           hover:bg-gray-50 focus:bg-white  selection:bg-black/10
-          focus:border-6 focus:border-amber-500 focus:outline-none
+          focus:border-2 focus:border-amber-500 focus:outline-none
         "
         rows={4}
         value={prompt}

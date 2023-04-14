@@ -126,9 +126,9 @@ This might take a while.`)
         }}
       />
 
-      <h1 className="font-bold text-4xl sm:text-5xl mt-8 sm:mt-0">Tell us about your next dream trip 🏝️</h1>
+      <h1 className="font-bold text-4xl sm:text-5xl">Tell us about your next dream trip 🏝️</h1>
 
-      <div className="w-full py-8">
+      <div className="w-full pt-6 pb-3">
         <Input
           prompt={prompt}
           fetching={fetching}
@@ -138,7 +138,7 @@ This might take a while.`)
         />
       </div>
 
-      {(result.length === 0) && <p className="block w-full p-4 text-base sm:text-lg text-gray-300 bg-transparent rounded border-2 border-dashed border-gray-600">
+      {(result.length === 0) && <p className="block w-full py-4 px-4 sm:px-6 text-base sm:text-lg text-zinc-300 bg-transparent rounded border-[1.5px] border-dashed border-zinc-700">
         <b>Tip:</b> The more specific you are about your preferences, the more tailored our recommendations will be to your interests and travel style. ✨
       </p>}
 

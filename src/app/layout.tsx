@@ -39,16 +39,16 @@ export default function RootLayout({
     <html lang="en" className={`${switzer.className}`}>
       <body className="relative">
         <div className="flex min-h-screen flex-col justify-between rounded-xl bg-gradient-to-b from-zinc-900 to-zinc-800 m-2 sm:m-3">
-          <header className="flex p-4">
-            <div className="w-2/6 sm:w-1/3 pr-2 sm:pr-0">
+          <header className="flex flex-wrap p-4">
+            <div className="w-2/6 sm:w-1/3 order-2 sm:order-1 pr-2 sm:pr-0">
               <NavLink id="help" name="Help" link="/help" />
             </div>
 
-            <div className="hidden sm:inline-flex sm:w-1/3 items-center justify-center">
-              <Link href="/" className={`text-2xl text-white font-bold select-none cursor-pointer ${erode.className}`}>Destinasyon AI</Link>
+            <div className="w-full sm:w-1/3 order-1 sm:order-2 mb-2 flex items-center justify-center">
+              <Link href="/" className={`text-2xl text-white hover:text-zinc-200 transition-colors duration-300 font-bold select-none cursor-pointer ${erode.className}`}>Destinasyon.app</Link>
             </div>
 
-            <div className="w-4/6 sm:w-1/3 flex justify-end">
+            <div className="w-4/6 sm:w-1/3 order-3 flex justify-end">
               <NavLink id="saved" name="My saved destinations" link="/saved-destinations" />
             </div>
           </header>
