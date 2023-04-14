@@ -1,4 +1,5 @@
 import './globals.css'
+import Link from 'next/link';
 import localFont from 'next/font/local'
 import NavLink from "./components/NavLink"
 
@@ -13,7 +14,16 @@ const switzer = localFont({
       weight: '500',
     }
   ]
-});
+})
+
+const erode = localFont({
+  src: [
+    {
+      path: './fonts/Erode/Erode-Bold.woff2',
+      weight: '800',
+    }
+  ]
+})
 
 export const metadata = {
   title: 'Destinasyon | Travel Recommendations in the Philippines',
@@ -35,7 +45,7 @@ export default function RootLayout({
             </div>
 
             <div className="hidden sm:inline-flex sm:w-1/3 items-center justify-center">
-              <span className="font-bold">Destinasyon AI</span>
+              <Link href="/" className={`text-2xl text-white font-bold select-none cursor-pointer ${erode.className}`}>Destinasyon AI</Link>
             </div>
 
             <div className="w-4/6 sm:w-1/3 flex justify-end">
