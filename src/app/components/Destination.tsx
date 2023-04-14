@@ -39,13 +39,13 @@ export default function Destination({ name, description, spots, index, onSaveBtn
       </p>
 
       <div className="flex flex-row flex-wrap">
-        {updatedSpots.map((spot: Spot, i: number) => {
+        {updatedSpots.length > 0 && updatedSpots.map((spot: Spot, i: number) => {
           return (
             <div className="w-full md:w-2/6 pr-2 flex flex-col" key={`spot-${index}-${i}`}>
               <div>
                 <div className="w-full h-48 relative mb-2 bg-gray-100 rounded-md">
                   <Image
-                    src={spot.image}
+                    src={spot.image || "./empty.svg"}
                     alt={spot.name}
                     fill={true}
                     style={{ objectFit: "cover" }}
@@ -61,7 +61,7 @@ export default function Destination({ name, description, spots, index, onSaveBtn
               </div>
 
               <div className="my-2">
-                <button className="bg-black hover:bg-zinc-800 text-white px-5 py-3 rounded transition-colors inline-flex items-center justify-center" onClick={() => onSaveBtnClick(spot.name, name, spot.description, spot.image)}>
+                <button className="bg-black hover:bg-zinc-800 text-white px-5 py-3 rounded transition-colors inline-flex items-center justify-center" onClick={() => onSaveBtnClick(spot.name, name, spot.description, spot.image || "./empty.svg")}>
                   <svg xmlns="http://www.w3.org/2000/svg" className="mr-2" width="1em" height="1em" viewBox="0 0 15 15"><path fill="currentColor" fillRule="evenodd" d="M8 2.75a.5.5 0 0 0-1 0V7H2.75a.5.5 0 0 0 0 1H7v4.25a.5.5 0 0 0 1 0V8h4.25a.5.5 0 0 0 0-1H8V2.75Z" clipRule="evenodd"></path></svg>
                   Save location
                 </button>
