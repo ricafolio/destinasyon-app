@@ -1,7 +1,8 @@
 import { Spot, DestinationProps } from "../types"
 import Image from "next/image"
 
-export default function Destination({ name, description, coordinates, spots, index, onSaveBtnClick }: DestinationProps) {
+export default function Destination({ name, description, spots, index, onSaveBtnClick }: DestinationProps) {
+
 
   return (
     <div className="bg-white text-black selection:bg-black/10 rounded-lg px-4 pt-4 pb-6 mb-6 text-left">

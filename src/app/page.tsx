@@ -174,7 +174,6 @@ This might take a while.`)
             <Destination
               name={destination.name}
               description={destination.description}
-              coordinates={destination.coordinates}
               spots={destination.spots}
               index={i}
               key={`destination-${i}`}

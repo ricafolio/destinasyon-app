@@ -34,13 +34,11 @@ export interface APIResponse {
 export interface Spot {
   name: string
   description: string
-  coordinates: string
 }
 
 export interface Destination {
   name: string
   description: string
-  coordinates: string
   spots: Spot[]
 }
 

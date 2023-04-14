@@ -34,9 +34,9 @@ export async function POST(req: Request) {
 If the conditions are unmet, stop completely. Just reply the following code:
 { success: false, data: null }
 
-2. Find me random travel destinations in the Philippines with that input. Give me three destinations. Provide coordinates. If there's specific city, place, location or region mentioned on input, do not search far from that place.
+2. Find me random travel destinations in the Philippines with that input. Give me three destinations. If there's specific city, place, location or region mentioned on input, do not search far from that place.
 
-3. Expand by giving another list of best spots inside each destinations. Give me three spots. Convince me why it's perfect based on my input. Also provide coordinates. 
+3. Expand by giving another list of best spots inside each destinations. Give me three spots. Convince me why it's perfect based on my input.
 
 Answer with array of objects format:
 {
@@ -45,12 +45,10 @@ Answer with array of objects format:
     {
       name: "",
       description: "",
-      coordinates: "",
       spots: [
         {
           name: "",
           description: "",
-          coordinates: "",
         }
       ]
     }
