@@ -16,6 +16,21 @@ export interface PromptPayload {
 
 // ------
 
+export type FormActionType = "submit" | "random"
+
+export interface FormBodyContent { 
+  action: FormActionType
+  prompt: string 
+}
+
+export interface APIResponse {
+  status: "error" | "ok"
+  message?: string
+  result: null
+}
+
+// ------
+
 export interface Spot {
   name: string
   description: string

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { PromptPayload } from "../../types"
+import { ChatGPTAgent, FormBodyContent, PromptPayload } from "../../types"
 
 if (!process.env.GPT_API_KEY) {
   throw new Error("Missing env var from OpenAI")
@@ -7,9 +7,9 @@ if (!process.env.GPT_API_KEY) {
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json()
-    let { action, prompt } = body
-    let temp = 0.75
+    let { action, prompt }: FormBodyContent = await req.json()
+    let s_temp: number = 0.70
+    let s_role: ChatGPTAgent = "system"
 
     if (action !== "submit" && action !== "random") {
       throw new Error("Invalid action!")
@@ -24,6 +24,7 @@ export async function POST(req: Request) {
       Write in first person POV. Maximum of 2 sentences. Use modal verbs of desire. Do not specify specific name of places. `
 
     } else if (action === "submit") {
+      s_role = "user"
       prompt = `"${prompt}"
 
 First, validate the prompt above. It's fine if the prompt is not clear, but if it's doesn't make any sense, stop now, ignore the next instructions and just reply the following code:
@@ -48,8 +49,7 @@ Answer with array of objects format:
       ]
     }
   ]
-}
-`
+}`
     }
 
     if (action === "submit" && !prompt) {
@@ -58,8 +58,8 @@ Answer with array of objects format:
 
     const payload: PromptPayload = {
       model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: prompt }],
-      temperature: temp,
+      messages: [{ role: s_role, content: prompt }],
+      temperature: s_temp,
     }
 
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
@@ -76,7 +76,7 @@ Answer with array of objects format:
     const data = await response.json()
     return NextResponse.json({
       status: "ok",
-      message: "success",
+      message: "succesfully",
       result: data
     })
   } catch (e) {
