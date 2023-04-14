@@ -25,7 +25,7 @@ export async function GET(request: Request) {
     if (search_results.results[0]["photos"]) {
       photo_id = search_results.results[0].photos[0].photo_reference
     }
-    const photo_url = `https://maps.googleapis.com/maps/api/place/photo?key=${process.env.MAPS_API_KEY}&photo_reference=${photo_id}&maxwidth=300&maxheight=300`
+    const photo_url = `https://maps.googleapis.com/maps/api/place/photo?key=${process.env.MAPS_API_KEY}&photo_reference=${photo_id}&maxwidth=500&maxheight=500`
 
     const photo_url_redirect = await fetch(photo_url, { 
       method: "GET",
