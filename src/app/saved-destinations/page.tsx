@@ -31,9 +31,10 @@ export default function MySavedDestinations() {
         }}
       />
 
-      <h1 className={`font-bold text-2xl sm:text-3xl mb-8 text-left ${erode.className}`}>Your saved destinations</h1>
+      {places.length > 0 && <h1 className={`font-bold text-2xl sm:text-3xl mb-8 text-left ${erode.className}`}>Your saved destinations</h1>}
+
       <div className="flex flex-row flex-wrap w-full">
-        {places?.map((place, i) => {
+        {places.length > 0 ? places.map((place, i) => {
           return (
             <DestinationSaved
               id={place.id}
@@ -45,7 +46,10 @@ export default function MySavedDestinations() {
               key={`destination-saved-${place.id}-${i}`}
             />
           )
-        })}
+        }) : <div className="w-full py-24 text-center">
+          <div className="text-4xl mb-2">😴</div>
+          <h3 className="text-gray-400">No saved destinations yet.</h3>
+        </div>}
       </div>
     </main>
   )
