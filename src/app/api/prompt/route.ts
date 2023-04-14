@@ -38,7 +38,7 @@ If the conditions are unmet, stop completely. Just reply the following code:
 
 3. Expand by giving another list of best spots inside each destinations. Give me three spots. Convince me why it's perfect based on my input.
 
-Answer with array of objects format:
+Answer with array of objects format, just keep the image attribute null:
 {
   success: true,
   data: [
@@ -49,11 +49,13 @@ Answer with array of objects format:
         {
           name: "",
           description: "",
+          image: null
         }
       ]
     }
   ]
-}`
+}
+`
     }
 
     if (action === "submit" && !prompt) {
