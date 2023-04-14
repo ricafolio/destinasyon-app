@@ -22,7 +22,7 @@ export default function RootLayout({
               <NavLink id="help" name="Help" link="/help" />
             </div>
 
-            <div className="w-full sm:w-1/3 order-1 sm:order-2 mb-2 flex items-center justify-center">
+            <div className="w-full sm:w-1/3 order-1 sm:order-2 mb-2 sm:mb-0 flex items-center justify-center h-auto">
               <Link href="/" className={`text-2xl text-white hover:text-zinc-200 transition-colors duration-300 font-bold select-none cursor-pointer ${erode.className}`}>Destinasyon.app</Link>
             </div>
 
