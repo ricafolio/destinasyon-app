@@ -11,7 +11,7 @@ export default function Home() {
   const [prompt, setPrompt] = useState<string>("")
   const [result, setResult] = useState<DestinationType[]>([])
   const [fetching, setFetching] = useState<boolean>(false)
-  const resultsRef = useRef(null)
+  const resultsRef = useRef<HTMLLinkElement>(null)
 
   async function generateDestinations() {
     if (!fetching) {
@@ -59,7 +59,7 @@ This might take a while.`)
         toast.success('Enjoy these results! ✨', { id: toastStatus })
         setResult(content.data)
         // scroll down
-        resultsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
       } else {
         toast.error('Sorry, please try again with different prompt.', { id: toastStatus })
       }
