@@ -29,8 +29,23 @@ export default function Home() {
       })
       const data = await response.json()
 
+      // error handling
+      let error_msg = null
+
       if (!response.ok) {
-        toast.error(data.message, { id: toastStatus })
+        error_msg = data.message
+      }
+
+      if (data.result["error"]) {
+        if (data.result["error"].type === "requests") {
+          error_msg = "Rate limit reached! Please try again in a minute."
+        } else {
+          error_msg = "Unknown error has occurred! Please try again."
+        }
+      }
+
+      if (error_msg) {
+        toast.error(error_msg, { id: toastStatus })
         setFetching(false)
         return
       }
@@ -39,13 +54,14 @@ export default function Home() {
       const content = eval("(" + data.result.choices[0].message.content + ")")
 
       if (content.success) {
-        setResult(content.data)
         toast.success('Enjoy these results! ✨', { id: toastStatus })
+        setResult(content.data)
       } else {
         toast.error('Sorry, please try again with different prompt.', { id: toastStatus })
       }
 
       setFetching(false)
+      return
     }
   }
 
@@ -65,15 +81,32 @@ export default function Home() {
       })
       const data = await response.json()
 
+      // error handling
+      let error_msg = null
+
       if (!response.ok) {
-        toast.error(data.message, { id: toastStatus })
+        error_msg = data.message
+      }
+
+      if (data.result["error"]) {
+        if (data.result["error"].type === "requests") {
+          error_msg = "Rate limit reached! Please try again in a minute."
+        } else {
+          error_msg = "Unknown error has occurred! Please try again."
+        }
+      }
+
+      if (error_msg) {
+        toast.error(error_msg, { id: toastStatus })
         setFetching(false)
         return
       }
 
-      setPrompt(data.result.choices[0].message.content)
+      // success
       toast.success('Random prompt generated!', { id: toastStatus })
+      setPrompt(data.result.choices[0].message.content)
       setFetching(false)
+      return
     }
   }
 
