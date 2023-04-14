@@ -149,7 +149,7 @@ export default function Home() {
               name={destination.name}
               description={destination.description}
               coordinates={destination.coordinates}
-              places={destination.places}
+              spots={destination.spots}
               index={i}
               key={`destination-${i}`}
             />

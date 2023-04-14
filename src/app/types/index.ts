@@ -41,7 +41,7 @@ export interface Destination {
   name: string
   description: string
   coordinates: string
-  places: Spot[]
+  spots: Spot[]
 }
 
 // ------

@@ -1,7 +1,7 @@
 import { Spot, DestinationProps } from "../types"
 import Image from "next/image"
 
-export default function Destination({ name, description, coordinates, places, index }: DestinationProps) {
+export default function Destination({ name, description, coordinates, spots, index }: DestinationProps) {
   return (
     <div className="bg-white text-black selection:bg-black/10 rounded-lg px-4 pt-4 pb-6 mb-6 text-left">
       <h1 className="text-3xl font-bold">
@@ -13,7 +13,7 @@ export default function Destination({ name, description, coordinates, places, in
       </p>
 
       <div className="flex flex-row flex-wrap">
-        {places.map((spot: Spot, i: number) => {
+        {spots.map((spot: Spot, i: number) => {
           return (
             <div className="w-full md:w-2/6 pr-2" key={`spot-${index}-${i}`}>
               <Image
