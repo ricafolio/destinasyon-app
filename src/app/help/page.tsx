@@ -1,4 +1,5 @@
 import FAQ from "../components/Faq"
+import { erode } from "../fonts"
 
 export default function Help() {
   const faqs = [
@@ -30,7 +31,7 @@ export default function Help() {
 
   return (
     <main className="flex flex-col items-center text-left text-white p-4 sm:p-12 md:p-24 pt-12 sm:pt-24">
-      <h1 className="font-bold text-2xl sm:text-2xl mb-6 block text-left">Help</h1>
+      <h1 className={`font-bold text-2xl sm:text-3xl mb-8 block text-left ${erode.className}`}>Help</h1>
       <div className="w-full sm:w-3/6 mx-auto">
         {faqs.map((faq, i) => {
           return <FAQ key={`faq-${i}`} question={faq.question} answer={faq.answer} />
