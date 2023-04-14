@@ -34,6 +34,7 @@ export interface APIResponse {
 export interface Spot {
   name: string
   description: string
+  image: string
 }
 
 export interface Destination {
