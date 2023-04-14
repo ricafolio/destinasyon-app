@@ -25,16 +25,18 @@ export async function POST(req: Request) {
 
     } else if (action === "submit") {
       s_role = "user"
-      prompt = `Prompt: "${prompt}"
+      prompt = `Input: "${prompt}"
 
-1. Validate the prompt above. It's fine if the prompt is vague, but if it's doesn't make any sense, stop now, ignore the next steps and just reply the following code:
+1. To ensure that the app can provide the best travel destinations for the user, validate the input above with following conditions:
+- The input should be related to travel or a desire to travel.
+- The input should be specific enough to allow the app to make recommendations.
+
+If the conditions are unmet, stop completely. Just reply the following code:
 { success: false, data: null }
 
-2. Find me random travel destinations in the Philippines with that prompt. Give me three destinations. Provide coordinates. 
+2. Find me random travel destinations in the Philippines with that input. Give me three destinations. Provide coordinates. If there's specific city, place, location or region mentioned on input, do not search far from that place.
 
-2.1 If there's real city, place, location or region on my prompt, just search inside that place.
-
-3. Expand by giving another list of best spots inside each destinations. Give me three spots. Convince me why it's perfect based on my prompt. Also provide coordinates. 
+3. Expand by giving another list of best spots inside each destinations. Give me three spots. Convince me why it's perfect based on my input. Also provide coordinates. 
 
 Answer with array of objects format:
 {
