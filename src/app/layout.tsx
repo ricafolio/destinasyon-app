@@ -49,7 +49,7 @@ export default function RootLayout({
             </div>
 
             <div className="w-4/6 sm:w-1/3 order-3 flex justify-end">
-              <NavLink id="saved" name="My saved destinations" link="/saved-destinations" />
+              <NavLink id="saved" name="Your saved destinations" link="/saved-destinations" />
             </div>
           </header>
 

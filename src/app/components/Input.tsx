@@ -5,7 +5,7 @@ export default function Input({ prompt, fetching, onRandomBtnClick, onSubmitBtnC
     <div className="flex flex-col w-full">
       <textarea
         name="prompt"
-        placeholder="Best places for island hopping in Mindanao"
+        placeholder="I wanna go to a place that offers the best island hopping experience in Mindanao"
         className="
           w-full text-lg sm:text-2xl px-4 py-3 rounded-lg
           transition-colors duration-150
