@@ -3,7 +3,7 @@ import Image from "next/image"
 
 export default function DestinationSaved({ id, name, description, image, at, onDeleteBtnClick }: DestinationSavedProps) {
   return (
-    <div className="w-3/6 md:w-3/12 flex flex-col items-start rounded bg-white text-black relative group" key={`saved-spot-${id}`}>
+    <div className="w-[calc(50%_-_8px)] lg:w-[calc(25%_-_8px)] flex flex-col items-start rounded-md bg-white text-black relative group" key={`saved-spot-${id}`}>
       <div className="text-left">
         <Image src={image} alt={name} width="60" height="60" className="w-full rounded-md transition duration-300 ease-in-out hover:brightness-90 rounded-b-none" />
         <div className="text-left pt-2 pb-4 px-3">

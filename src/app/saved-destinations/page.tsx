@@ -33,7 +33,7 @@ export default function MySavedDestinations() {
 
       {places.length > 0 && <h1 className={`font-bold text-2xl sm:text-3xl mb-8 text-left ${erode.className}`}>Your saved destinations</h1>}
 
-      <div className="flex flex-row flex-wrap w-full">
+      <div className="flex flex-row flex-wrap w-full gap-2">
         {places.length > 0 ? places.map((place, i) => {
           return (
             <DestinationSaved
