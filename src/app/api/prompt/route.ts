@@ -38,7 +38,7 @@ If the conditions are unmet, stop completely. Just reply the following code:
 
 3. Expand by giving another list of best spots inside each destinations. Give me three spots. Convince me why it's perfect based on my input.
 
-Answer with array of objects format only:
+Only answer with array of objects format! Only answer in code, never answer anything else:
 {
   success: true,
   data: [
