@@ -16,8 +16,13 @@ export async function POST(req: Request) {
     }
 
     if (action === "random") {
-      prompt = "Pretend you are a person thinking about your next dream trip. Randomly generate a one prompt with 1 to 2 sentences for your ideal place to travel based on an activity/food/experience. Write in first person POV. Use modal verbs of desire. Do not specify specific name of places."
-      temp = 1
+      s_temp = 0.60
+      prompt = `You are thinking about your next dream trip. 
+
+      Pick one random unusual experiences like food experiences or outdoor activities. Use that as your reason to travel.
+
+      Write in first person POV. Maximum of 2 sentences. Use modal verbs of desire. Do not specify specific name of places. `
+
     } else if (action === "submit") {
       prompt = `"${prompt}"
 
