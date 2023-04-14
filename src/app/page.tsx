@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { Toaster, toast } from "react-hot-toast"
 import { Destination as DestinationType } from "./types"
 
@@ -11,6 +11,7 @@ export default function Home() {
   const [prompt, setPrompt] = useState<string>("")
   const [result, setResult] = useState<DestinationType[]>([])
   const [fetching, setFetching] = useState<boolean>(false)
+  const resultsRef = useRef(null)
 
   async function generateDestinations() {
     if (!fetching) {
@@ -57,6 +58,8 @@ This might take a while.`)
       if (content.success) {
         toast.success('Enjoy these results! ✨', { id: toastStatus })
         setResult(content.data)
+        // scroll down
+        resultsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
       } else {
         toast.error('Sorry, please try again with different prompt.', { id: toastStatus })
       }
@@ -139,11 +142,11 @@ This might take a while.`)
       </div>
 
       {(result.length === 0) && <p className="block w-full py-4 px-4 sm:px-6 text-base sm:text-lg text-zinc-300 bg-transparent rounded border-[1.5px] border-dashed border-zinc-700">
-        <b>Tip:</b> The more specific you are about your preferences, the more tailored our recommendations will be to your interests and travel style. ✨
+        <b>Tip:</b> The more specific you are about your preferences, the more tailored our recommendations will be. ✨
       </p>}
 
-      <div className="w-full rounded-xl mt-4">
-        {result.length > 0 && <h2 className="font-bold text-3xl sm:text-4xl mt-8 mb-8">Check out these destinations!</h2>}
+      <div ref={resultsRef} className="w-full rounded-xl mt-4 scroll-mt-4">
+        {result.length > 0 && <h2 className="font-bold text-3xl sm:text-4xl mt-16 mb-8">Check out these destinations!</h2>}
         {result?.map((destination, i) => {
           return (
             <Destination

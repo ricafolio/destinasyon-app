@@ -6,6 +6,10 @@
   background: #ffffff40;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color:#ffdd99;
   background-image:
