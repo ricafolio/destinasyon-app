@@ -1,11 +1,11 @@
-import './globals.css'
-import Link from 'next/link';
+import "./globals.css"
+import Link from "next/link";
 import NavLink from "./components/NavLink"
-import { switzer, erode } from './fonts'
+import { switzer, erode } from "./fonts"
 
 export const metadata = {
-  title: 'Destinasyon | Travel Recommendations in the Philippines',
-  description: 'Get travel recommendations in the Philippines using AI',
+  title: "Destinasyon | Travel Recommendations in the Philippines",
+  description: "Get travel recommendations in the Philippines using AI",
 }
 
 export default function RootLayout({

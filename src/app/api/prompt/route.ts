@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server"
 import { ChatGPTAgent, FormBodyContent, PromptPayload } from "../../types"
 
 if (!process.env.OPENAI_API_KEY) {
@@ -40,9 +40,9 @@ export async function POST(req: Request) {
 If the conditions are unmet, stop completely. Just reply the following code:
 { success: false, data: null }
 
-2. Find me three random travel destinations in the Philippines with that input. If there's specific place mentioned in input, just search within that place.
+2. Find me three random travel destinations in the Philippines with that input. If there"s specific place mentioned in input, just search within that place.
 
-3. Expand by giving another list of best spots on each destinations. Give me three spots. Convince me why it's perfect based on my input.
+3. Expand by giving another list of best spots on each destinations. Give me three spots. Convince me why it"s perfect based on my input.
 
 Only answer with the following array of objects format:
 {

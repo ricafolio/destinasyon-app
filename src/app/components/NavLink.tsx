@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from "next/link"
 
 export default function NavLink({ id, name, link }: { id: string, name: string, link: string }) {
   return (

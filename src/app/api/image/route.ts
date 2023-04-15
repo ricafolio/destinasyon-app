@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server"
 
 if (!process.env.GOOGLE_PLACES_API_KEY) {
   throw new Error("Missing Maps API key!")
@@ -7,12 +7,12 @@ if (!process.env.GOOGLE_PLACES_API_KEY) {
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url)
-    const place_name = searchParams.get('query')
+    const place_name = searchParams.get("query")
 
     // Fetch place info and get image ref id
     const search_place_url = `https://maps.googleapis.com/maps/api/place/textsearch/json?key=${process.env.GOOGLE_PLACES_API_KEY}&query=${place_name}`
     const search_place_res = await fetch(search_place_url, { 
-      method: 'GET'
+      method: "GET"
     })
     const search_results = await search_place_res.json()
     
