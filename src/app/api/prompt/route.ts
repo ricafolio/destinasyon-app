@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { ChatGPTAgent, FormBodyContent, PromptPayload } from "../../types"
 
-if (!process.env.GPT_API_KEY) {
+if (!process.env.OPENAI_API_KEY) {
   throw new Error("Missing env var from OpenAI")
 }
 
@@ -74,7 +74,7 @@ Only answer with the following array of objects format:
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${
-          process.env.GPT_API_KEY ?? ""
+          process.env.OPENAI_API_KEY ?? ""
         }`,
       },
       method: "POST",
