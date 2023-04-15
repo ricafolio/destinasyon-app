@@ -8,9 +8,8 @@ export default function Destination({ name, description, spots, index, onSaveBtn
   useEffect(() => {
     const fetchImageUrl = async (theSpot: Spot) => {
       try {
-        const response = await fetch(`/api/find-image?query=${theSpot.name}`)
+        const response = await fetch(`/api/find-image?query=${theSpot.name}, ${name}`)
         const data = await response.json()
-        // pray
         const newSpot = {
           name: theSpot.name,
           description: theSpot.description,
@@ -24,9 +23,11 @@ export default function Destination({ name, description, spots, index, onSaveBtn
 
     // call the fetchImageUrl function for each location object with a null image
     spots.map((spot) => {
-      fetchImageUrl(spot)
+      if(!spot.image) {
+        fetchImageUrl(spot)
+      }
     })
-  }, [spots])
+  }, [])
 
   return (
     <div className="bg-white text-black selection:bg-black/10 rounded-lg px-4 pt-4 pb-6 mb-6 text-left">
