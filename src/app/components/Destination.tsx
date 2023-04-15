@@ -8,7 +8,7 @@ export default function Destination({ name, description, spots, index, onSaveBtn
   useEffect(() => {
     const fetchImageUrl = async (theSpot: Spot) => {
       try {
-        const response = await fetch(`/api/image?query=${theSpot.name}`)
+        const response = await fetch(`/api/find-image?query=${theSpot.name}`)
         const data = await response.json()
         // pray
         const newSpot = {
