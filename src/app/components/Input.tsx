@@ -9,9 +9,8 @@ export default function Input({ prompt, fetching, onRandomBtnClick, onSubmitBtnC
         className="
           w-full text-lg sm:text-2xl px-4 py-3 rounded-lg
           transition-colors duration-150
-          border-2 border-white text-black
-          hover:bg-gray-50 focus:bg-white  selection:bg-black/10
-          focus:border-2 focus:border-amber-500 focus:outline-none
+          border-2 border-black text-black bg-[#e8e6e4]
+          selection:bg-black/10 focus:bg-gray-50 focus:border-amber-500 focus:outline-none
         "
         rows={4}
         value={prompt}
