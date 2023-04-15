@@ -26,6 +26,11 @@ export default function Home() {
   }, [places])
 
   async function generateDestinations() {
+    if (!prompt) {
+      toast.error("Please add a prompt!")
+      return
+    }
+
     if (!fetching) {
       const toastStatus = toast.loading(`Finding best destinations for you...
 This might take a while.`)
