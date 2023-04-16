@@ -18,15 +18,15 @@ export default function RootLayout({
       <body className="relative">
         <div className="flex min-h-screen flex-col justify-between rounded-xl bg-gradient-to-b from-zinc-900 to-zinc-800 m-2 sm:m-3">
           <header className="flex flex-wrap p-4">
-            <div className="w-2/6 sm:w-1/3 order-2 sm:order-1 pr-2 sm:pr-0">
+            <div className="w-2/6 sm:w-fit md:w-1/3 order-2 md:order-1 pr-2 md:pr-0">
               <NavLink id="help" name="Help" link="/help" />
             </div>
 
-            <div className="w-full sm:w-1/3 order-1 sm:order-2 mb-2 sm:mb-0 flex items-center justify-center h-auto">
+            <div className="w-full sm:flex-1 md:w-1/3 order-1 md:order-2 mb-2 sm:mb-0 flex items-center justify-center sm:justify-start md:justify-center pl-0 sm:pl-2 md:pl-0 h-auto">
               <Link href="/" className={`text-2xl transition-all duration-300 font-bold select-none cursor-pointer ${erode.className} inline-block text-transparent  bg-clip-text bg-gradient-to-r from-yellow-200 via-red-300 via-amber-300 to-purple-500 hover:brightness-90`}>Destinasyon.app</Link>
             </div>
 
-            <div className="w-4/6 sm:w-1/3 order-3 flex justify-end">
+            <div className="w-4/6 sm:w-fit md:w-1/3 order-3 flex justify-end">
               <NavLink id="saved" name="Your saved destinations" link="/saved-destinations" />
             </div>
           </header>
