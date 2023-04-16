@@ -1,8 +1,8 @@
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
-import { Spot } from "../types"
+import { Spot, SpotState } from "../types"
 
-export const useSpotStore = create(
+export const useSpotStore = create<SpotState, [["zustand/persist", SpotState]]>(
   persist(
     (set, get) => ({
       spots: [],
