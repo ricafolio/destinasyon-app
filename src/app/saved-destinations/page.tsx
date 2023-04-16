@@ -4,16 +4,16 @@ import { useState, useEffect } from "react"
 import { Toaster, toast } from "react-hot-toast"
 import { erode } from "../fonts"
 
-import { SpotSaved } from "../types"
+import { Spot } from "../types"
 import { DeleteSpotArgs } from "../types/props"
 
 import DestinationSaved from "../components/DestinationSaved"
 
 export default function MySavedDestinations() {
-  const [spots, setSpots] = useState<SpotSaved[]>(() => {
+  const [spots, setSpots] = useState<Spot[]>(() => {
     if (typeof window !== "undefined") {
-      const stored_places = localStorage.getItem("spots")
-      return stored_places !== null ? JSON.parse(stored_places) : []
+      const stored_spots = localStorage.getItem("spots")
+      return stored_spots !== null ? JSON.parse(stored_spots) : []
     } else {
       return []
     }
@@ -23,8 +23,8 @@ export default function MySavedDestinations() {
     localStorage.setItem("spots", JSON.stringify(spots))
   }, [spots])
 
-  function handleDeleteBtnClick({ id, name }: DeleteSpotArgs) {
-    setSpots(spots.filter((spot) => spot.id !== id))
+  function handleDeleteBtnClick({ uid, name }: DeleteSpotArgs) {
+    setSpots(spots.filter((spot) => spot.uid !== uid))
     toast.success(`${name} deleted.`)
   }
 
@@ -41,16 +41,19 @@ export default function MySavedDestinations() {
       {spots.length > 0 && <h1 className={`font-bold text-2xl sm:text-3xl mb-8 text-left ${erode.className}`}>Your saved destinations</h1>}
 
       <div className="flex flex-row flex-wrap w-full gap-2">
-        {spots.length > 0 ? spots.map((spot, i) => {
+        {spots.length > 0 ? spots.map((spot: Spot, i: number) => {
           return (
             <DestinationSaved
-              id={spot.id}
               name={spot.name}
               description={spot.description}
               imageUrl={spot.imageUrl}
-              destination={spot.destination}
+              mapsUrl={spot.mapsUrl}
+              uid={spot.uid}
+              vicinity={spot.vicinity}
+              rating={spot.rating}
+              totalRatings={spot.totalRatings}
               onDeleteBtnClick={handleDeleteBtnClick}
-              key={`spot-saved-${spot.id}-${i}`}
+              key={`spot-saved-${spot.uid}-${i}`}
             />
           )
         }) : <div className="w-full py-24 text-center">
