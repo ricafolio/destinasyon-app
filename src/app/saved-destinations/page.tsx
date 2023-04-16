@@ -13,9 +13,9 @@ export default function MySavedDestinations() {
   const [spots, setSpots] = useState<SpotSaved[]>(() => {
     if (typeof window !== "undefined") {
       const stored_places = localStorage.getItem("spots")
-      return (stored_places !== null) ? JSON.parse(stored_places) : []
+      return stored_places !== null ? JSON.parse(stored_places) : []
     } else {
-      return[]
+      return []
     }
   })
 
@@ -24,7 +24,7 @@ export default function MySavedDestinations() {
   }, [spots])
 
   function handleDeleteBtnClick({ id, name }: DeleteSpotArgs) {
-    setSpots(spots.filter(spot => spot.id !== id))
+    setSpots(spots.filter((spot) => spot.id !== id))
     toast.success(`${name} deleted.`)
   }
 
@@ -34,7 +34,7 @@ export default function MySavedDestinations() {
         position="top-center"
         reverseOrder={false}
         containerStyle={{
-          top: 28,
+          top: 28
         }}
       />
 
