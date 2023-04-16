@@ -18,6 +18,18 @@ async function fetchPlaceInfo(placeName: string) {
   return searchResults.results
 }
 
+async function fetchPlaceDetails(placeID: string) {
+  const searchDetailsUrl = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeID}&key=${GOOGLE_PLACES_API_KEY}`
+  const searchDetailsRes = await fetch(searchDetailsUrl, { method: "GET" })
+  const searchResults = await searchDetailsRes.json()
+  
+  if (searchResults.status !== "OK") {
+    throw new Error("API error")
+  }
+
+  return searchResults.result
+}
+
 async function fetchPlacePhotoUrl(photoId: string) {
   const photoUrl = `https://maps.googleapis.com/maps/api/place/photo?key=${GOOGLE_PLACES_API_KEY}&photo_reference=${photoId}&maxwidth=500&maxheight=500`
   // google redirects the image to new url, without api key in the url
