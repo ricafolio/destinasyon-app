@@ -2,6 +2,7 @@ import Image from "next/image"
 import { useState, useEffect } from "react"
 import { Spot } from "../types"
 import { DestinationProps } from "../types/props"
+import SaveIcon from "./icons/SaveIcon"
 
 export default function Destination({ name: destinationName, description: destinationDescription, spots, index, onSaveBtnClick }: DestinationProps) {
   const [updatedSpots, setUpdatedSpots] = useState<Spot[]>([])
@@ -70,7 +71,9 @@ export default function Destination({ name: destinationName, description: destin
                   description: spot.description, 
                   imageUrl: spot.imageUrl || "./empty.svg"
                 })}>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="mr-2" width="1em" height="1em" viewBox="0 0 15 15"><path fill="currentColor" fillRule="evenodd" d="M8 2.75a.5.5 0 0 0-1 0V7H2.75a.5.5 0 0 0 0 1H7v4.25a.5.5 0 0 0 1 0V8h4.25a.5.5 0 0 0 0-1H8V2.75Z" clipRule="evenodd"></path></svg>
+                  <span className="mr-2">
+                    <SaveIcon />
+                  </span>
                   Save location
                 </button>
               </div>
