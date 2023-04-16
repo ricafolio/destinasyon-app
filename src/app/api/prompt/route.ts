@@ -59,7 +59,7 @@ export async function POST(req: Request) {
               {
                 name: "",
                 description: "",
-                image: null
+                imageUrl: null
               }
             ]
           }

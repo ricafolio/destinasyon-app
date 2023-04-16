@@ -5,27 +5,27 @@ export default function Help() {
   const faqs = [
     {
       question: "What is the app about?",
-      answer: "This app is a travel destination discovery platform that utilizes AI to help users find the best travel destinations in the Philippines based on their specified interests.",
+      answer: "This app is a travel destination discovery platform that utilizes AI to help users find the best travel destinations in the Philippines based on their specified interests."
     },
     {
-      question: "What is \"Destinasyon\"?",
-      answer: "The word \"Destinasyon\" is a Filipino term that translates to \"destination\" in English. It refers to a place that someone intends to visit or reach, particularly in the context of travel.",
+      question: 'What is "Destinasyon"?',
+      answer: 'The word "Destinasyon" is a Filipino term that translates to "destination" in English. It refers to a place that someone intends to visit or reach, particularly in the context of travel.'
     },
     {
       question: "Which technologies were used to develop the app?",
-      answer: "Next.js, Tailwind CSS, OpenAI & Google Places API",
+      answer: "Next.js, Tailwind CSS, OpenAI & Google Places API"
     },
     {
       question: "How is user data handled in your app?",
-      answer: "We do not store any user data on our servers, with the exception of the saved destinations which are stored locally in the user's browser. This means that only the user who saved the destinations can access and view them.",
+      answer: "We do not store any user data on our servers, with the exception of the saved destinations which are stored locally in the user's browser. This means that only the user who saved the destinations can access and view them."
     },
     {
       question: "Can I provide feedback or report issues?",
-      answer: "Sure! I am always looking for ways to improve the app and make it more useful.",
+      answer: "Sure! I am always looking for ways to improve the app and make it more useful."
     },
     {
       question: "How can I contact you?",
-      answer: "Please contact me in Discord - <Jyu/>#4209",
+      answer: "Please contact me in Discord - <Jyu/>#4209"
     }
   ]
 
