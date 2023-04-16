@@ -1,27 +1,30 @@
 "use client"
 
-import { erode } from "../fonts"
 import { useState, useEffect } from "react"
 import { Toaster, toast } from "react-hot-toast"
-import { StoredPlaces } from "../types"
+import { erode } from "../fonts"
+
+import { SpotSaved } from "../types"
+import { DeleteSpotArgs } from "../types/props"
+
 import DestinationSaved from "../components/DestinationSaved"
 
 export default function MySavedDestinations() {
-  const [places, setPlaces] = useState<StoredPlaces[]>(() => {
+  const [spots, setSpots] = useState<SpotSaved[]>(() => {
     if (typeof window !== "undefined") {
-      const stored_places = localStorage.getItem("places")
-      return stored_places !== null ? JSON.parse(stored_places) : []
+      const stored_places = localStorage.getItem("spots")
+      return (stored_places !== null) ? JSON.parse(stored_places) : []
     } else {
       return[]
     }
   })
 
   useEffect(() => {
-    localStorage.setItem("places", JSON.stringify(places))
-  }, [places])
+    localStorage.setItem("spots", JSON.stringify(spots))
+  }, [spots])
 
-  function handleDeleteBtnClick(id: number, name: string) {
-    setPlaces(places.filter(place => place.id !== id));
+  function handleDeleteBtnClick({ id, name }: DeleteSpotArgs) {
+    setSpots(spots.filter(spot => spot.id !== id))
     toast.success(`${name} deleted.`)
   }
 
@@ -35,19 +38,19 @@ export default function MySavedDestinations() {
         }}
       />
 
-      {places.length > 0 && <h1 className={`font-bold text-2xl sm:text-3xl mb-8 text-left ${erode.className}`}>Your saved destinations</h1>}
+      {spots.length > 0 && <h1 className={`font-bold text-2xl sm:text-3xl mb-8 text-left ${erode.className}`}>Your saved destinations</h1>}
 
       <div className="flex flex-row flex-wrap w-full gap-2">
-        {places.length > 0 ? places.map((place, i) => {
+        {spots.length > 0 ? spots.map((spot, i) => {
           return (
             <DestinationSaved
-              id={place.id}
-              name={place.name}
-              description={place.description}
-              image={place.image}
-              at={place.at}
+              id={spot.id}
+              name={spot.name}
+              description={spot.description}
+              imageUrl={spot.imageUrl}
+              destination={spot.destination}
               onDeleteBtnClick={handleDeleteBtnClick}
-              key={`destination-saved-${place.id}-${i}`}
+              key={`spot-saved-${spot.id}-${i}`}
             />
           )
         }) : <div className="w-full py-24 text-center">
