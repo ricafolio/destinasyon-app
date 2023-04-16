@@ -2,19 +2,21 @@
 
 import { useState, useEffect, useRef } from "react"
 import { Toaster, toast } from "react-hot-toast"
-import { Destination as DestinationType, StoredPlaces } from "./types"
+
+import { Destination as DestinationType, SpotSaved } from "./types"
+import { PromptValueChangeArgs, SaveSpotArgs } from "./types/props"
 
 import Input from "./components/Input"
 import Destination from "./components/Destination"
 
 export default function Home() {
+  const resultsRef = useRef<HTMLIFrameElement>(null)
   const [prompt, setPrompt] = useState<string>("")
   const [result, setResult] = useState<DestinationType[]>([])
-  const [fetching, setFetching] = useState<boolean>(false)
-  const resultsRef = useRef<HTMLIFrameElement>(null)
-  const [places, setPlaces] = useState<StoredPlaces[]>(() => {
+  const [isFetching, setIsFetching] = useState<boolean>(false)
+  const [places, setPlaces] = useState<SpotSaved[]>(() => {
     if (typeof window !== "undefined") {
-      const stored_places = localStorage.getItem("places")
+      const stored_places = localStorage.getItem("spots")
       return stored_places !== null ? JSON.parse(stored_places) : []
     } else {
       return[]
@@ -22,7 +24,7 @@ export default function Home() {
   })
 
   useEffect(() => {
-    localStorage.setItem("places", JSON.stringify(places))
+    localStorage.setItem("spots", JSON.stringify(places))
   }, [places])
 
   async function generateDestinations() {
@@ -31,10 +33,10 @@ export default function Home() {
       return
     }
 
-    if (!fetching) {
+    if (!isFetching) {
       const toastStatus = toast.loading(`Finding best destinations for you...
 This might take a while.`)
-      setFetching(true)
+      setIsFetching(true)
 
       const response = await fetch("/api/prompt", {
         method: "POST",
@@ -65,7 +67,7 @@ This might take a while.`)
 
       if (error_msg) {
         toast.error(error_msg, { id: toastStatus })
-        setFetching(false)
+        setIsFetching(false)
         return
       }
 
@@ -81,15 +83,15 @@ This might take a while.`)
         toast.error('Sorry, please try again with different prompt.', { id: toastStatus })
       }
 
-      setFetching(false)
+      setIsFetching(false)
       return
     }
   }
 
   async function generateRandomPrompt() {
-    if (!fetching) {
+    if (!isFetching) {
       const toastStatus = toast.loading('Generating random prompt...')
-      setFetching(true)
+      setIsFetching(true)
 
       const response = await fetch("/api/prompt", {
         method: "POST",
@@ -119,32 +121,32 @@ This might take a while.`)
 
       if (error_msg) {
         toast.error(error_msg, { id: toastStatus })
-        setFetching(false)
+        setIsFetching(false)
         return
       }
 
       // success
       toast.success('Random prompt generated!', { id: toastStatus })
       setPrompt(data.result.choices[0].message.content)
-      setFetching(false)
+      setIsFetching(false)
       return
     }
   }
 
-  function handlePromptValueChange(value: string, clear: boolean) {
-    setPrompt(value)
-    if(clear) toast.success('Cleared')
+  function handlePromptValueChange({ newValue, isClear }: PromptValueChangeArgs) {
+    setPrompt(newValue)
+    if(isClear) toast.success('Cleared')
   }
 
-  function handleSaveBtnClick(name: string, at: string, description: string, image: string) {
+  function handleSaveBtnClick({ name, destination, description, imageUrl }: SaveSpotArgs) {
     setPlaces([
       ...places,
       {
         id: places.length + 1,
-        at: at,
+        destination: destination,
         name: name,
         description: description,
-        image: image
+        imageUrl: imageUrl
       }
     ])
     toast.success(`${name} saved.`)
@@ -165,7 +167,7 @@ This might take a while.`)
       <div className="w-full pt-6 pb-3">
         <Input
           prompt={prompt}
-          fetching={fetching}
+          isFetching={isFetching}
           onRandomBtnClick={generateRandomPrompt}
           onSubmitBtnClick={generateDestinations}
           onPromptValueChange={handlePromptValueChange}
@@ -178,6 +180,7 @@ This might take a while.`)
 
       <div ref={resultsRef} className="w-full rounded-xl mt-4 scroll-mt-4">
         {result.length > 0 && <h2 className="font-bold text-3xl sm:text-4xl mt-16 mb-8">Check out these destinations!</h2>}
+
         {result?.map((destination, i) => {
           return (
             <Destination
