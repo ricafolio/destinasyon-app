@@ -6,8 +6,8 @@ if (!GOOGLE_PLACES_API_KEY) {
   throw new Error("Missing Maps API key!")
 }
 
-async function fetchPlaceInfo(placeName: string) {
-  const searchPlaceUrl = `https://maps.googleapis.com/maps/api/place/textsearch/json?key=${GOOGLE_PLACES_API_KEY}&query=${placeName}`
+async function fetchPlaceBasicInfo(placeName: string) {
+  const searchPlaceUrl = `https://maps.googleapis.com/maps/api/place/textsearch/json?key=${GOOGLE_PLACES_API_KEY}&query=${placeName}&region=PH`
   const searchPlaceRes = await fetch(searchPlaceUrl, { method: "GET" })
   const searchResults = await searchPlaceRes.json()
   
@@ -49,7 +49,7 @@ export async function GET(request: Request) {
       throw new Error("Query params not found!")
     }
 
-    const placeInfo = await fetchPlaceInfo(placeName || "")
+    const placeInfo = await fetchPlaceBasicInfo(placeName || "")
 
     if (placeInfo.length === 0) {
       throw new Error("Place not found") 
