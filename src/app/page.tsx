@@ -1,10 +1,11 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useRef } from "react"
 import { Toaster, toast } from "react-hot-toast"
 
 import { Destination as DestinationType, Spot } from "./types"
 import { PromptValueChangeArgs } from "./types/props"
+import { useSpotStore } from "./store"
 
 import Input from "./components/Input"
 import Destination from "./components/Destination"
@@ -14,18 +15,7 @@ export default function Home() {
   const [prompt, setPrompt] = useState<string>("")
   const [result, setResult] = useState<DestinationType[]>([])
   const [isFetching, setIsFetching] = useState<boolean>(false)
-  const [spots, setSpots] = useState<Spot[]>(() => {
-    if (typeof window !== "undefined") {
-      const stored_spots = localStorage.getItem("spots")
-      return stored_spots !== null ? JSON.parse(stored_spots) : []
-    } else {
-      return []
-    }
-  })
-
-  useEffect(() => {
-    localStorage.setItem("spots", JSON.stringify(spots))
-  }, [spots])
+  const addSpot = useSpotStore(state => state.addSpot)
 
   async function generateDestinations() {
     if (!prompt) {
@@ -139,8 +129,7 @@ This might take a while.`)
   }
 
   function handleSaveBtnClick({ name, description, imageUrl, mapsUrl, uid, vicinity, rating, totalRatings }: Spot) {
-    setSpots([
-      ...spots,
+    addSpot(
       {
         name,
         description,
@@ -151,7 +140,7 @@ This might take a while.`)
         rating,
         totalRatings,
       }
-    ])
+    )
     toast.success(`${name} saved.`)
   }
 
