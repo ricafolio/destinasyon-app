@@ -43,3 +43,9 @@ export interface FAQProps {
   question: string
   answer: string
 }
+
+export interface NavLinkProps {
+  id: string
+  name: string
+  link: string
+}
