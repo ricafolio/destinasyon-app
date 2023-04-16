@@ -41,7 +41,7 @@ async function fetchPlacePhotoUrl(photoId: string) {
 
 export async function GET(request: Request) {
   try {
-    // expected url: /api/find-image?query=place+name
+    // expected url: /api/find-place?query=place+name
     const { searchParams } = new URL(request.url)
     const placeName: string | null = searchParams.get("query")
 

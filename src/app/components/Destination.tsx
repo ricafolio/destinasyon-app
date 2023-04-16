@@ -11,7 +11,7 @@ export default function Destination({ name, description, spots, index, onSaveBtn
     // run once on mount
     const fetchImageUrl = async (spot: Spot) => {
       try {
-        const response = await fetch(`/api/find-image?query=${spot.name}, ${name}`)
+        const response = await fetch(`/api/find-place?query=${spot.name}, ${name}`)
         const { data } = await response.json()
         const newSpot = {
           name: spot.name,
