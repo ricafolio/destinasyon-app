@@ -4,20 +4,26 @@ import { Spot } from "../types"
 import { DestinationProps } from "../types/props"
 import SaveIcon from "./icons/SaveIcon"
 
-export default function Destination({ name: destinationName, description: destinationDescription, spots, index, onSaveBtnClick }: DestinationProps) {
+export default function Destination({ name, description, spots, index, onSaveBtnClick }: DestinationProps) {
   const [updatedSpots, setUpdatedSpots] = useState<Spot[]>([])
 
   useEffect(() => {
     // run once on mount
-    const fetchImageUrl = async (theSpot: Spot) => {
+    const fetchImageUrl = async (spot: Spot) => {
       try {
-        const response = await fetch(`/api/find-image?query=${theSpot.name}, ${destinationName}`)
-        const data = await response.json()
+        const response = await fetch(`/api/find-image?query=${spot.name}, ${name}`)
+        const { data } = await response.json()
         const newSpot = {
-          name: theSpot.name,
-          description: theSpot.description,
-          imageUrl: data.url
+          name: spot.name,
+          description: spot.description,
+          imageUrl: data.imageUrl,
+          mapsUrl: data.mapsUrl,
+          uid: spot.uid,
+          vicinity: data.vicinity,
+          rating: data.rating,
+          totalRatings: data.totalRatings
         }
+        // render more info from API
         setUpdatedSpots((prevSpot) => [...prevSpot, newSpot])
       } catch (e) {
         console.error(e)
@@ -34,9 +40,9 @@ export default function Destination({ name: destinationName, description: destin
 
   return (
     <div className="bg-white text-black selection:bg-black/10 rounded-lg px-4 pt-4 pb-6 mb-6 text-left">
-      <h1 className="text-3xl font-bold">{destinationName}</h1>
+      <h1 className="text-3xl font-bold">{name}</h1>
 
-      <p className="text-gray-800 text-lg mt-1 mb-3">{destinationDescription}</p>
+      <p className="text-gray-800 text-lg mt-1 mb-3">{description}</p>
 
       <div className="flex flex-row flex-wrap">
         {updatedSpots.length > 0 &&
@@ -62,10 +68,14 @@ export default function Destination({ name: destinationName, description: destin
                     className="bg-black hover:bg-zinc-800 text-white px-5 py-3 rounded transition-colors inline-flex items-center justify-center"
                     onClick={() =>
                       onSaveBtnClick({
-                        destination: destinationName,
                         name: spot.name,
                         description: spot.description,
-                        imageUrl: spot.imageUrl || "./empty.svg"
+                        imageUrl: spot.imageUrl || "./empty.svg",
+                        mapsUrl: spot.mapsUrl,
+                        uid: spot.uid,
+                        vicinity: name,
+                        rating: spot.rating,
+                        totalRatings: spot.totalRatings,
                       })
                     }
                   >
