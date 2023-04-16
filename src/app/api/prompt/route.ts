@@ -48,7 +48,8 @@ export async function POST(req: Request) {
 
       3. Expand by giving another list of best spots on each destinations. Give me three spots. Convince me why it"s perfect based on my input.
 
-      Only answer with the following array of objects format:
+      Strictly only answer with the following array of objects format:
+      \`\`\`
       {
         success: true,
         data: [
@@ -59,12 +60,20 @@ export async function POST(req: Request) {
               {
                 name: "",
                 description: "",
-                imageUrl: null
+                imageUrl: null,
+                uid: null,
+                vicinity: null,
+                mapsUrl: null,
+                rating: null,
+                totalRatings: null,
               }
             ]
           }
         ]
-      }`
+      }
+      \`\`\`
+      Do not add value on null properties, specifically \`imageUrl\`, \`uid\`, \`vicinity\`, \`mapsUrl\`, \`rating\` and \`totalRatings\`.
+      `
     }
 
     const payload: PromptPayload = {

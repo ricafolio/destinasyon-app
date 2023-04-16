@@ -3,8 +3,8 @@
 import { useState, useEffect, useRef } from "react"
 import { Toaster, toast } from "react-hot-toast"
 
-import { Destination as DestinationType, SpotSaved } from "./types"
-import { PromptValueChangeArgs, SaveSpotArgs } from "./types/props"
+import { Destination as DestinationType, Spot } from "./types"
+import { PromptValueChangeArgs } from "./types/props"
 
 import Input from "./components/Input"
 import Destination from "./components/Destination"
@@ -14,18 +14,18 @@ export default function Home() {
   const [prompt, setPrompt] = useState<string>("")
   const [result, setResult] = useState<DestinationType[]>([])
   const [isFetching, setIsFetching] = useState<boolean>(false)
-  const [places, setPlaces] = useState<SpotSaved[]>(() => {
+  const [spots, setSpots] = useState<Spot[]>(() => {
     if (typeof window !== "undefined") {
-      const stored_places = localStorage.getItem("spots")
-      return stored_places !== null ? JSON.parse(stored_places) : []
+      const stored_spots = localStorage.getItem("spots")
+      return stored_spots !== null ? JSON.parse(stored_spots) : []
     } else {
       return []
     }
   })
 
   useEffect(() => {
-    localStorage.setItem("spots", JSON.stringify(places))
-  }, [places])
+    localStorage.setItem("spots", JSON.stringify(spots))
+  }, [spots])
 
   async function generateDestinations() {
     if (!prompt) {
@@ -138,15 +138,18 @@ This might take a while.`)
     if (isClear) toast.success("Cleared")
   }
 
-  function handleSaveBtnClick({ name, destination, description, imageUrl }: SaveSpotArgs) {
-    setPlaces([
-      ...places,
+  function handleSaveBtnClick({ name, description, imageUrl, mapsUrl, uid, vicinity, rating, totalRatings }: Spot) {
+    setSpots([
+      ...spots,
       {
-        id: places.length + 1,
-        destination: destination,
-        name: name,
-        description: description,
-        imageUrl: imageUrl
+        name,
+        description,
+        imageUrl,
+        mapsUrl,
+        uid,
+        vicinity,
+        rating,
+        totalRatings,
       }
     ])
     toast.success(`${name} saved.`)
@@ -188,11 +191,11 @@ This might take a while.`)
         {result?.map((destination, i) => {
           return (
             <Destination 
-              name={destination.name} 
-              description={destination.description} 
-              spots={destination.spots} 
-              index={i} 
-              key={`destination-${i}`} 
+              name={destination.name}
+              description={destination.description}
+              spots={destination.spots}
+              index={i}
+              key={`destination-${i}`}
               onSaveBtnClick={handleSaveBtnClick}
             />
           )
