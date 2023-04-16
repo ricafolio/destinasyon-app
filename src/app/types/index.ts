@@ -41,30 +41,7 @@ export interface Destination {
   spots: Spot[]
 }
 
-export interface StoredPlaces {
+export interface SpotSaved extends Spot {
   id: number
-  at: string
-  name: string
-  description: string
-  image: string
-}
-
-// ------
-
-export interface DestinationProps extends Destination {
-  index: number
-  onSaveBtnClick: (arg1: string, arg2: string, arg3: string, arg4: string) => void
-}
-
-export interface DestinationSavedProps extends StoredPlaces {
-  id: number
-  onDeleteBtnClick: (arg1: number, arg2: string) => void
-}
-
-export interface InputProps {
-  prompt: string
-  fetching: boolean
-  onRandomBtnClick: () => void
-  onSubmitBtnClick: () => void
-  onPromptValueChange: (arg1: string, arg2: boolean) => void
+  destination: string
 }
