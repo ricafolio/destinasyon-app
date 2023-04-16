@@ -45,3 +45,11 @@ export interface Destination {
   description: string
   spots: Spot[]
 }
+
+// -------
+
+export interface SpotState {
+  spots: Spot[]
+  addSpot: (newSpot: Spot) => void
+  deleteSpotByID: (uid: string) => void
+}

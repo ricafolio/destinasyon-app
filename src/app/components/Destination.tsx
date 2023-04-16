@@ -36,6 +36,7 @@ export default function Destination({ name, description, spots, index, onSaveBtn
         fetchImageUrl(spot)
       }
     })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
