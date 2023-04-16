@@ -51,21 +51,50 @@ export async function GET(request: Request) {
 
     const placeInfo = await fetchPlaceInfo(placeName || "")
 
-    if (placeInfo[0].photos) {
-      // get place photo reference id
-      const photoId = placeInfo[0].photos[0].photo_reference
-      // fetch photo url using reference id we got
-      let photoUrlRedirect: string | null = await fetchPlacePhotoUrl(photoId)
-
-      return NextResponse.json({
-        status: "ok",
-        message: "Place image found",
-        url: photoUrlRedirect,
-      })
-    } else {
-       throw new Error("Place image not found") 
+    if (placeInfo.length === 0) {
+      throw new Error("Place not found") 
     }
 
+    const placeID = placeInfo[0].reference
+    const placeRating = placeInfo[0].rating
+    const placeRatingsTotal = placeInfo[0].user_ratings_total
+
+    let placePhoto: string | null = null
+    let placeUrl: string | null = null
+    let placeVicinity: string | null = null
+
+    // get photo using reference id
+    if (placeInfo[0].photos) {
+      const photoId = placeInfo[0].photos[0].photo_reference
+      placePhoto = await fetchPlacePhotoUrl(photoId)
+    } else {
+      throw new Error("Place image not found") 
+    }
+
+    // place more details
+    if (placeID) {
+      let placeDetails = await fetchPlaceDetails(placeID)
+
+      if (!placeDetails.url || !placeDetails.vicinity) {
+        throw new Error("Place details not found")
+      }
+
+      placeUrl = placeDetails.url
+      placeVicinity = placeDetails.vicinity
+    }
+
+    return NextResponse.json({
+      status: "ok",
+      message: "Place found",
+      data: {
+        imageUrl: placePhoto,
+        mapsUrl: placeUrl,
+        uid: placeID,
+        vicinity: placeVicinity,
+        rating: placeRating,
+        totalRatings: placeRatingsTotal
+      }
+    })
   } catch (e) {
     let message: string = "Unknown error occurred."
 
@@ -78,7 +107,7 @@ export async function GET(request: Request) {
     return NextResponse.json({
       status: "error",
       message: message,
-      url: null,
+      data: null
     }, { status: 400 })
   }
 }
