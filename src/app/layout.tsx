@@ -4,8 +4,8 @@ import NavLink from "./components/NavLink"
 import { switzer, erode } from "./fonts"
 
 export const metadata = {
-  title: "Destinasyon | Travel Recommendations in the Philippines",
-  description: "Get travel recommendations in the Philippines using AI",
+  title: "Destinasyon | Discover Travel Destinations in the Philippines",
+  description: "Destinasyon is a travel destination finder app that uses AI technology to suggest the best travel destinations in the Philippines.",
 }
 
 export default function RootLayout({
