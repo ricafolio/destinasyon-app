@@ -13,11 +13,18 @@ import DestinationSaved from "../components/DestinationSaved"
 export default function MySavedDestinations() {
   const spots = useSpotStore(state => state.spots)
   const deleteSpotByID = useSpotStore(state => state.deleteSpotByID)
+  const [mounted, setMounted] = useState<Boolean>(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   function handleDeleteBtnClick({ uid, name }: DeleteSpotArgs) {
     deleteSpotByID(uid)
     toast.success(`${name} deleted.`)
   }
+
+  if(!mounted) { return null }
 
   return (
     <main className="flex flex-col items-center text-center text-white p-4 md:p-12 lg:p-24 pt-12 sm:pt-24">
