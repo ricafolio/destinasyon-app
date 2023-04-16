@@ -18,7 +18,7 @@ export default function Destination({ name, description, spots, index, onSaveBtn
           description: spot.description,
           imageUrl: data.imageUrl,
           mapsUrl: data.mapsUrl,
-          uid: spot.uid,
+          uid: data.uid,
           vicinity: data.vicinity,
           rating: data.rating,
           totalRatings: data.totalRatings
