@@ -1,33 +1,23 @@
-import { Destination, SpotSaved } from "./index"
+import { Destination, Spot } from "./index"
 
 // Args
-
 export interface PromptValueChangeArgs {
   newValue: string
   isClear: boolean
 }
 
 export interface DeleteSpotArgs {
-  id: number,
+  uid: string,
   name: string
-}
-
-export interface SaveSpotArgs {
-  destination: string
-  name: string
-  description: string
-  imageUrl: string
 }
 
 // Props
-
 export interface DestinationProps extends Destination {
   index: number
-  onSaveBtnClick: (...args: SaveSpotArgs[]) => void
+  onSaveBtnClick: (...args: Spot[]) => void
 }
 
-export interface SpotSavedProps extends SpotSaved {
-  id: number
+export interface SpotProps extends Spot {
   onDeleteBtnClick: (...args: DeleteSpotArgs[]) => void
 }
 

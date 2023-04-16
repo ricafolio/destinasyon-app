@@ -33,15 +33,15 @@ export interface Spot {
   name: string
   description: string
   imageUrl: string
+  mapsUrl: string
+  uid: string
+  vicinity: string
+  rating: number
+  totalRatings: number
 }
 
 export interface Destination {
   name: string
   description: string
   spots: Spot[]
-}
-
-export interface SpotSaved extends Spot {
-  id: number
-  destination: string
 }
