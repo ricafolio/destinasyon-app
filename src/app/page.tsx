@@ -19,7 +19,7 @@ export default function Home() {
       const stored_places = localStorage.getItem("spots")
       return stored_places !== null ? JSON.parse(stored_places) : []
     } else {
-      return[]
+      return []
     }
   })
 
@@ -41,12 +41,12 @@ This might take a while.`)
       const response = await fetch("/api/prompt", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({
           action: "submit",
           prompt: prompt
-        }),
+        })
       })
       const data = await response.json()
 
@@ -75,12 +75,12 @@ This might take a while.`)
       const content = eval("(" + data.result.choices[0].message.content + ")")
 
       if (content.success) {
-        toast.success('Enjoy these results! ✨', { id: toastStatus })
+        toast.success("Enjoy these results! ✨", { id: toastStatus })
         setResult(content.data)
         // scroll down
-        resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
       } else {
-        toast.error('Sorry, please try again with different prompt.', { id: toastStatus })
+        toast.error("Sorry, please try again with different prompt.", { id: toastStatus })
       }
 
       setIsFetching(false)
@@ -90,17 +90,17 @@ This might take a while.`)
 
   async function generateRandomPrompt() {
     if (!isFetching) {
-      const toastStatus = toast.loading('Generating random prompt...')
+      const toastStatus = toast.loading("Generating random prompt...")
       setIsFetching(true)
 
       const response = await fetch("/api/prompt", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({
           action: "random"
-        }),
+        })
       })
       const data = await response.json()
 
@@ -126,7 +126,7 @@ This might take a while.`)
       }
 
       // success
-      toast.success('Random prompt generated!', { id: toastStatus })
+      toast.success("Random prompt generated!", { id: toastStatus })
       setPrompt(data.result.choices[0].message.content)
       setIsFetching(false)
       return
@@ -135,7 +135,7 @@ This might take a while.`)
 
   function handlePromptValueChange({ newValue, isClear }: PromptValueChangeArgs) {
     setPrompt(newValue)
-    if(isClear) toast.success('Cleared')
+    if (isClear) toast.success("Cleared")
   }
 
   function handleSaveBtnClick({ name, destination, description, imageUrl }: SaveSpotArgs) {
@@ -158,37 +158,41 @@ This might take a while.`)
         position="top-center"
         reverseOrder={false}
         containerStyle={{
-          top: 28,
+          top: 28
         }}
       />
 
       <h1 className="font-bold text-4xl sm:text-5xl">Tell us about your dream trip 🏝️</h1>
 
       <div className="w-full pt-6 pb-3">
-        <Input
-          prompt={prompt}
-          isFetching={isFetching}
-          onRandomBtnClick={generateRandomPrompt}
-          onSubmitBtnClick={generateDestinations}
-          onPromptValueChange={handlePromptValueChange}
+        <Input 
+          prompt={prompt} 
+          isFetching={isFetching} 
+          onRandomBtnClick={generateRandomPrompt} 
+          onSubmitBtnClick={generateDestinations} 
+          onPromptValueChange={handlePromptValueChange} 
         />
       </div>
 
-      {(result.length === 0) && <p className="block w-full py-4 px-4 sm:px-6 text-base sm:text-lg text-zinc-300 bg-transparent rounded border-[1.5px] border-dashed border-zinc-700">
-        <b>Tip:</b> The more specific you are about your preferences, the more tailored our recommendations will be. ✨
-      </p>}
+      {result.length === 0 && (
+        <p className="block w-full py-4 px-4 sm:px-6 text-base sm:text-lg text-zinc-300 bg-transparent rounded border-[1.5px] border-dashed border-zinc-700">
+          <b>Tip:</b> The more specific you are about your preferences, the more tailored our recommendations will be. ✨
+        </p>
+      )}
 
       <div ref={resultsRef} className="w-full rounded-xl mt-4 scroll-mt-4">
-        {result.length > 0 && <h2 className="font-bold text-3xl sm:text-4xl mt-16 mb-8">Check out these destinations!</h2>}
+        {result.length > 0 && (
+          <h2 className="font-bold text-3xl sm:text-4xl mt-16 mb-8">Check out these destinations!</h2>
+        )}
 
         {result?.map((destination, i) => {
           return (
-            <Destination
-              name={destination.name}
-              description={destination.description}
-              spots={destination.spots}
-              index={i}
-              key={`destination-${i}`}
+            <Destination 
+              name={destination.name} 
+              description={destination.description} 
+              spots={destination.spots} 
+              index={i} 
+              key={`destination-${i}`} 
               onSaveBtnClick={handleSaveBtnClick}
             />
           )
