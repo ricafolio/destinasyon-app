@@ -6,25 +6,16 @@ import { erode } from "../fonts"
 
 import { Spot } from "../types"
 import { DeleteSpotArgs } from "../types/props"
+import { useSpotStore } from "../store"
 
 import DestinationSaved from "../components/DestinationSaved"
 
 export default function MySavedDestinations() {
-  const [spots, setSpots] = useState<Spot[]>(() => {
-    if (typeof window !== "undefined") {
-      const stored_spots = localStorage.getItem("spots")
-      return stored_spots !== null ? JSON.parse(stored_spots) : []
-    } else {
-      return []
-    }
-  })
-
-  useEffect(() => {
-    localStorage.setItem("spots", JSON.stringify(spots))
-  }, [spots])
+  const spots = useSpotStore(state => state.spots)
+  const deleteSpotByID = useSpotStore(state => state.deleteSpotByID)
 
   function handleDeleteBtnClick({ uid, name }: DeleteSpotArgs) {
-    setSpots(spots.filter((spot) => spot.uid !== uid))
+    deleteSpotByID(uid)
     toast.success(`${name} deleted.`)
   }
 
