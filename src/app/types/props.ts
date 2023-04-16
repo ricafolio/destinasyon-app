@@ -38,3 +38,8 @@ export interface InputProps {
   onSubmitBtnClick: () => void
   onPromptValueChange: (...args: PromptValueChangeArgs[]) => void
 }
+
+export interface FAQProps {
+  question: string
+  answer: string
+}
