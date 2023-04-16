@@ -1,5 +1,3 @@
-import Destination from "../components/Destination"
-
 export type ChatGPTAgent = "user" | "system"
 
 export interface ChatGPTMessage {
@@ -18,9 +16,9 @@ export interface PromptPayload {
 
 export type FormActionType = "submit" | "random"
 
-export interface FormBodyContent { 
+export interface FormBodyContent {
   action: FormActionType
-  prompt: string 
+  prompt: string
 }
 
 export interface APIResponse {
@@ -34,7 +32,7 @@ export interface APIResponse {
 export interface Spot {
   name: string
   description: string
-  image?: string
+  imageUrl: string
 }
 
 export interface Destination {
