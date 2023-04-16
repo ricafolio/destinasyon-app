@@ -24,7 +24,9 @@ export default function MySavedDestinations() {
     toast.success(`${name} deleted.`)
   }
 
-  if(!mounted) { return null }
+  if (!mounted) { 
+    return null 
+  }
 
   return (
     <main className="flex flex-col items-center text-center text-white p-4 md:p-12 lg:p-24 pt-12 sm:pt-24">
