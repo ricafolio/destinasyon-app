@@ -59,7 +59,12 @@ export async function POST(req: Request) {
               {
                 name: "",
                 description: "",
-                imageUrl: null
+                imageUrl: null,
+                uid: null,
+                vicinity: null,
+                mapsUrl: null,
+                rating: null,
+                totalRatings: null,
               }
             ]
           }
