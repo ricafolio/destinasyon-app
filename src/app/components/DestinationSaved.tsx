@@ -1,5 +1,6 @@
 import { SpotSavedProps } from "../types/props"
 import Image from "next/image"
+import DeleteIcon from "./icons/DeleteIcon"
 
 export default function DestinationSaved({ id, name, description, imageUrl, destination, onDeleteBtnClick }: SpotSavedProps) {
   return (
@@ -23,7 +24,7 @@ export default function DestinationSaved({ id, name, description, imageUrl, dest
 
       <div className="group-hover:block hidden absolute top-2 right-2">
         <button className="bg-red-600 hover:bg-red-500 text-white px-4 py-2 rounded transition-colors inline-flex items-center justify-center" onClick={() => onDeleteBtnClick({ id, name })}>
-          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 15 15"><path fill="currentColor" fillRule="evenodd" d="M5.5 1a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4ZM3 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1H11v8a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4h-.5a.5.5 0 0 1-.5-.5ZM5 4h5v8H5V4Z" clipRule="evenodd"></path></svg>
+          <DeleteIcon />
         </button>
       </div>
     </div>
