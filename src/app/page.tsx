@@ -4,7 +4,7 @@ import { useState, useRef } from "react"
 import { Toaster, toast } from "react-hot-toast"
 
 import { Destination as DestinationType, Spot } from "./types"
-import { PromptValueChangeArgs } from "./types/props"
+import { PromptValueChangeArgs, FetchStatus } from "./types/props"
 import { useSpotStore } from "./store"
 
 import Input from "./components/Input"
@@ -14,7 +14,10 @@ export default function Home() {
   const resultsRef = useRef<HTMLIFrameElement>(null)
   const [prompt, setPrompt] = useState<string>("")
   const [result, setResult] = useState<DestinationType[]>([])
-  const [isFetching, setIsFetching] = useState<boolean>(false)
+  const [fetchStatus, setFetchStatus] = useState<FetchStatus>({
+    isLoading: false,
+    source: null
+  })
   const addSpot = useSpotStore(state => state.addSpot)
 
   async function generateDestinations() {
@@ -23,10 +26,13 @@ export default function Home() {
       return
     }
 
-    if (!isFetching) {
+    if (!fetchStatus.isLoading) {
       const toastStatus = toast.loading(`Finding best destinations for you...
 This might take a while.`)
-      setIsFetching(true)
+      setFetchStatus({
+        isLoading: true,
+        source: "submit"
+      })
 
       const response = await fetch("/api/prompt", {
         method: "POST",
@@ -57,7 +63,10 @@ This might take a while.`)
 
       if (error_msg) {
         toast.error(error_msg, { id: toastStatus })
-        setIsFetching(false)
+        setFetchStatus({
+          isLoading: false,
+          source: null
+        })
         return
       }
 
@@ -73,15 +82,21 @@ This might take a while.`)
         toast.error("Sorry, please try again with different prompt.", { id: toastStatus })
       }
 
-      setIsFetching(false)
+      setFetchStatus({
+        isLoading: false,
+        source: null
+      })
       return
     }
   }
 
   async function generateRandomPrompt() {
-    if (!isFetching) {
+    if (!fetchStatus.isLoading) {
       const toastStatus = toast.loading("Generating random prompt...")
-      setIsFetching(true)
+      setFetchStatus({
+        isLoading: true,
+        source: "random"
+      })
 
       const response = await fetch("/api/prompt", {
         method: "POST",
@@ -111,14 +126,20 @@ This might take a while.`)
 
       if (error_msg) {
         toast.error(error_msg, { id: toastStatus })
-        setIsFetching(false)
+        setFetchStatus({
+          isLoading: false,
+          source: null
+        })
         return
       }
 
       // success
       toast.success("Random prompt generated!", { id: toastStatus })
       setPrompt(data.result.choices[0].message.content)
-      setIsFetching(false)
+      setFetchStatus({
+        isLoading: false,
+        source: null
+      })
       return
     }
   }
@@ -159,7 +180,7 @@ This might take a while.`)
       <div className="w-full pt-6 pb-3">
         <Input 
           prompt={prompt} 
-          isFetching={isFetching} 
+          fetchStatus={fetchStatus} 
           onRandomBtnClick={generateRandomPrompt} 
           onSubmitBtnClick={generateDestinations} 
           onPromptValueChange={handlePromptValueChange} 
