@@ -5,6 +5,7 @@ import Image from "next/image"
 import SaveIcon from "./icons/SaveIcon"
 import ExternalIcon from "./icons/ExternalIcon"
 import CheckIcon from "./icons/CheckIcon"
+import StarIcon from "./icons/StarIcon"
 
 interface SpotExtended extends Spot {
   onSaveBtnClick: (...args: Spot[]) => void
@@ -37,6 +38,9 @@ export default function DestinationSpot({
       </div>
 
       <section className="px-3 pt-1 pb-2 sm:pb-4">
+        <a href={mapsUrl} target="_blank" rel="noreferrer" className="block cursor-pointer transition-colors duration-200 hover:brightness-95">
+          <StarIcon rating={rating} totalRatings={totalRatings} />
+        </a>
         <h2 className="text-xl font-semibold text-black">
           <a href={mapsUrl} target="_blank" rel="noreferrer" className="transition-colors duration-200 hover:text-gray-600 inline-block cursor-pointer">
             <span>
