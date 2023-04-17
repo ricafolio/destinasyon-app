@@ -5,7 +5,7 @@ import { DestinationProps } from "../types/props"
 import DestinationSpot from "./DestinationSpot";
 
 export default function Destination({ name, description, spots, index, onSaveBtnClick }: DestinationProps) {
-  const [updatedSpots, setUpdatedSpots] = useState<Spot[]>(spots)
+  const [updatedSpots, setUpdatedSpots] = useState<Spot[]>([])
 
   useEffect(() => {
     // run once on mount
