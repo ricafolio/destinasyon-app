@@ -61,7 +61,6 @@ export async function GET(request: Request) {
 
     let placePhoto: string | null = null
     let placeUrl: string | null = null
-    let placeVicinity: string | null = null
 
     // get photo using reference id
     if (placeInfo[0].photos) {
@@ -75,12 +74,11 @@ export async function GET(request: Request) {
     if (placeID) {
       let placeDetails = await fetchPlaceDetails(placeID)
 
-      if (!placeDetails.url || !placeDetails.vicinity) {
+      if (!placeDetails.url) {
         throw new Error("Place details not found")
       }
 
       placeUrl = placeDetails.url
-      placeVicinity = placeDetails.vicinity
     }
 
     return NextResponse.json({
@@ -90,7 +88,6 @@ export async function GET(request: Request) {
         imageUrl: placePhoto,
         mapsUrl: placeUrl,
         uid: placeID,
-        vicinity: placeVicinity,
         rating: placeRating,
         totalRatings: placeRatingsTotal
       }
