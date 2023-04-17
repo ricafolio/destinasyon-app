@@ -9,7 +9,9 @@ import ExternalIcon from "./icons/ExternalIcon"
 import CheckIcon from "./icons/CheckIcon"
 
 export default function Destination({ name, description, spots, index, onSaveBtnClick }: DestinationProps) {
-  const [updatedSpots, setUpdatedSpots] = useState<Spot[]>([])
+  const [updatedSpots, setUpdatedSpots] = useState<Spot[]>(spots)
+  const [saved, setSaved] = useState<boolean>(false)
+  const [permanentlyHidden, setPermanentlyHidden] = useState<boolean>(false)
 
   useEffect(() => {
     // run once on mount
@@ -34,14 +36,11 @@ export default function Destination({ name, description, spots, index, onSaveBtn
       }
     }
 
-    // fetch image url for each spot with a null image
-    spots.map((spot: Spot) => {
-      if (!spot.imageUrl) {
-        fetchImageUrl(spot)
-      }
-    })
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  function permanentlyHideAfterSave() {
+    setTimeout(() => {
+      setPermanentlyHidden(true)
+    }, 4000)
+  }
 
   return (
     <div className="text-left mb-24">
@@ -81,7 +80,7 @@ export default function Destination({ name, description, spots, index, onSaveBtn
                   </p>
                 </section>
 
-                <div className="group-hover:block hidden absolute top-0 right-2 my-2">
+                <div className={`${!permanentlyHidden ? 'group-hover:block' : 'group-hover:hidden'} hidden absolute top-0 right-2 my-2`}>
                   <button
                     className={`${!saved ? 'bg-red-700 hover:bg-red-800' : 'bg-green-600'} text-white px-4 py-2 rounded transition-colors duration-200 inline-flex items-center justify-center`}
                     onClick={() => {
@@ -96,6 +95,7 @@ export default function Destination({ name, description, spots, index, onSaveBtn
                         totalRatings: spot.totalRatings,
                       })
                       setSaved(true)
+                      permanentlyHideAfterSave()
                     }}
                     disabled={saved}
                   >
