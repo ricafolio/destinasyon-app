@@ -6,6 +6,7 @@ import { DestinationProps } from "../types/props"
 
 import SaveIcon from "./icons/SaveIcon"
 import ExternalIcon from "./icons/ExternalIcon"
+import CheckIcon from "./icons/CheckIcon"
 
 export default function Destination({ name, description, spots, index, onSaveBtnClick }: DestinationProps) {
   const [updatedSpots, setUpdatedSpots] = useState<Spot[]>([])
@@ -82,24 +83,28 @@ export default function Destination({ name, description, spots, index, onSaveBtn
 
                 <div className="group-hover:block hidden absolute top-0 right-2 my-2">
                   <button
-                    className="bg-red-700 hover:bg-red-800 text-white px-4 py-2 rounded transition-colors duration-200 inline-flex items-center justify-center"
-                    onClick={() =>
+                    className={`${!saved ? 'bg-red-700 hover:bg-red-800' : 'bg-green-600'} text-white px-4 py-2 rounded transition-colors duration-200 inline-flex items-center justify-center`}
+                    onClick={() => {
                       onSaveBtnClick({
-                      name: spot.name,
-                      description: spot.description,
-                      imageUrl: spot.imageUrl || "./empty.svg",
-                      mapsUrl: spot.mapsUrl,
-                      uid: spot.uid,
-                      vicinity: name,
-                      rating: spot.rating,
-                      totalRatings: spot.totalRatings,
+                        name: spot.name,
+                        description: spot.description,
+                        imageUrl: spot.imageUrl || "./empty.svg",
+                        mapsUrl: spot.mapsUrl,
+                        uid: spot.uid,
+                        vicinity: name,
+                        rating: spot.rating,
+                        totalRatings: spot.totalRatings,
                       })
-                    }
+                      setSaved(true)
+                    }}
+                    disabled={saved}
                   >
                     <span className="mr-1">
-                      <SaveIcon />
+                      {!saved ? <SaveIcon /> : <CheckIcon />}
                     </span>
-                    <span>Save</span>
+                    <span>
+                      {!saved ? "Save" : "Saved!"}
+                    </span>
                   </button>
                 </div>
               </div>
