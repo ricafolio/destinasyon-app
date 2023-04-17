@@ -21,15 +21,24 @@ export default function Input({ prompt, fetchStatus, onRandomBtnClick, onSubmitB
         autoFocus={true}
       ></textarea>
 
-      <div className="flex flex-col sm:flex-row sm:justify-between w-full mt-2">
-        <div className="flex flex-row items-center">
-          <button className="w-1/2 flex items-center justify-center text-center rounded-lg px-8 py-2 bg-white text-black h-full transition-colors duration-150 hover:bg-slate-100 active:bg-slate-200 focus:bg-slate-50 disabled:cursor-wait" onClick={onRandomBtnClick} disabled={fetchStatus.isLoading}>
-            <span className="rotate-45">
-              <RandomIcon />
-            </span>
-            <span className="text-lg sm:text-xl ml-2">Random</span>
+      <div className="w-full flex flex-col sm:flex-row sm:justify-between mt-2">
+        <div className="w-full sm:w-4/6 md:w-3/6 lg:w-2/6 flex flex-row items-center">
+          <button className="w-1/2 flex items-center justify-center text-center rounded-lg px-8 py-2 bg-white text-black h-auto transition-colors duration-150 hover:bg-slate-100 active:bg-slate-200 focus:bg-slate-50 disabled:cursor-wait" onClick={onRandomBtnClick} disabled={fetchStatus.isLoading}>
+            {fetchStatus.isLoading && fetchStatus.source === 'random' ? 
+              <span className="!text-black py-1">
+                <LoadingIcon />
+              </span>
+              : (
+                <>
+                  <span className="rotate-45">
+                    <RandomIcon />
+                  </span>
+                  <span className="text-lg sm:text-xl ml-2">Random</span>
+                </>
+              )
+            }
           </button>
-          <button className="w-1/2 bg-white text-black text-lg sm:text-xl rounded-lg px-8 py-2 transition-colors duration-150 hover:bg-slate-100 active:bg-slate-200 focus:bg-slate-50 h-full ml-2" onClick={() => onPromptValueChange({ newValue: "", isClear: true })}>
+          <button className="w-1/2 bg-white text-black text-lg sm:text-xl rounded-lg px-8 py-2 transition-colors duration-150 hover:bg-slate-100 active:bg-slate-200 focus:bg-slate-50 h-auto ml-2" onClick={() => onPromptValueChange({ newValue: "", isClear: true })}>
             Clear
           </button>
         </div>
