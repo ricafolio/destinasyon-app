@@ -4,7 +4,7 @@ import DeleteIcon from "./icons/DeleteIcon"
 
 export default function DestinationSaved({ name, description, imageUrl, mapsUrl, uid, vicinity, rating, totalRatings, onDeleteBtnClick }: SpotProps) {
   return (
-    <div className="w-[calc(50%_-_8px)] lg:w-[calc(25%_-_8px)] flex flex-col items-start rounded-md bg-white text-black relative group" key={`saved-spot-${uid}`}>
+    <div className="w-full sm:w-[calc(50%_-_8px)] lg:w-[calc(33.33%_-_8px)] flex flex-col items-start rounded-md bg-white text-black relative group" key={`saved-spot-${uid}`}>
       <div className="text-left">
         <div className="w-full h-48 relative bg-gray-100 rounded-md">
           <Image
