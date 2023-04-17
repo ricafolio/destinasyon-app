@@ -4,7 +4,7 @@ export default function StarIcon({ rating, totalRatings } : { rating: number, to
   const ratingPercentage = (actualRating / maxRating) * 100
 
   return (
-    <div className="flex items-center mb-1">
+    <div className="flex items-center">
       <div className="ratings-wrapper">
         <div className="empty-stars"></div>
         <div className="filled-stars" style={{ width: `${ratingPercentage}%` }}></div>
