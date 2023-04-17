@@ -1,8 +1,11 @@
 import Image from "next/image"
 import { useState, useEffect } from "react"
+import { Fade } from "react-awesome-reveal";
 import { Spot } from "../types"
 import { DestinationProps } from "../types/props"
+
 import SaveIcon from "./icons/SaveIcon"
+import ExternalIcon from "./icons/ExternalIcon"
 
 export default function Destination({ name, description, spots, index, onSaveBtnClick }: DestinationProps) {
   const [updatedSpots, setUpdatedSpots] = useState<Spot[]>([])
@@ -40,55 +43,69 @@ export default function Destination({ name, description, spots, index, onSaveBtn
   }, [])
 
   return (
-    <div className="bg-white text-black selection:bg-black/10 rounded-lg px-4 pt-4 pb-6 mb-6 text-left">
-      <h1 className="text-3xl font-bold">{name}</h1>
+    <div className="text-left mb-24">
+      <div className="px-2 mb-4">
+        <h1 className="text-white text-3xl font-bold">{name}</h1>
+        <p className="text-gray-200 text-lg mt-2">{description}</p>
+      </div>
 
-      <p className="text-gray-800 text-lg mt-1 mb-3">{description}</p>
-
-      <div className="flex flex-row flex-wrap">
-        {updatedSpots.length > 0 &&
-          updatedSpots.map((spot: Spot, i: number) => {
+      <div className="w-full flex flex-row flex-wrap gap-2">
+        <Fade cascade={true} damping={0.5} className="group w-full sm:w-[calc(50%_-_8px)] lg:w-[calc(33.33%_-_8px)] flex flex-col bg-white rounded-lg relative">
+          {updatedSpots.map((spot: Spot, i: number) => {
             return (
-              <div className="w-full md:w-2/6 pr-2 flex flex-col" key={`spot-${index}-${i}`}>
-                <div>
-                  <div className="w-full h-48 relative mb-2 bg-gray-100 rounded-md">
-                    <Image 
-                      src={spot.imageUrl || "./empty.svg"} 
-                      alt={spot.name} 
-                      fill={true} 
-                      style={{ objectFit: "cover" }} 
-                      className="w-full rounded-md transition duration-300 ease-in-out hover:brightness-90" 
-                    />
-                  </div>
-                  <h2 className="text-xl font-semibold">{spot.name}</h2>
-                  <p className="text-gray-700 mt-1 mb-2 md:mb-0 sm:pr-4">{spot.description}</p>
+              <div key={`spot-${index}-${i}`}>
+                <div className="w-full h-48 relative mb-2 bg-gray-100 rounded-md">
+                  <Image 
+                    src={spot.imageUrl || "./empty.svg"} 
+                    alt={spot.name} 
+                    fill={true} 
+                    style={{ objectFit: "cover" }} 
+                    className="w-full rounded-t-md transition duration-300 ease-in-out hover:brightness-90" 
+                  />
                 </div>
 
-                <div className="my-2">
+                <section className="px-3 pt-1 pb-4">
+                  <h2 className="text-xl font-semibold text-black">
+                    <a href={spot.mapsUrl} target="_blank" rel="noreferrer" className="transition-colors duration-200 hover:text-gray-600 inline-block cursor-pointer">
+                      <span>
+                        {spot.name} 
+                        <span className="inline-block align-middle hover:scale-100 ml-1">
+                          <ExternalIcon />
+                        </span>
+                      </span>
+                    </a>
+                  </h2>
+                  <p className="text-sm text-gray-700 mt-2 mb-2 md:mb-0">
+                    {spot.description}
+                  </p>
+                </section>
+
+                <div className="group-hover:block hidden absolute top-0 right-2 my-2">
                   <button
-                    className="bg-black hover:bg-zinc-800 text-white px-5 py-3 rounded transition-colors inline-flex items-center justify-center"
+                    className="bg-red-700 hover:bg-red-800 text-white px-5 py-3 rounded transition-colors inline-flex items-center justify-center"
                     onClick={() =>
                       onSaveBtnClick({
-                        name: spot.name,
-                        description: spot.description,
-                        imageUrl: spot.imageUrl || "./empty.svg",
-                        mapsUrl: spot.mapsUrl,
-                        uid: spot.uid,
-                        vicinity: name,
-                        rating: spot.rating,
-                        totalRatings: spot.totalRatings,
+                      name: spot.name,
+                      description: spot.description,
+                      imageUrl: spot.imageUrl || "./empty.svg",
+                      mapsUrl: spot.mapsUrl,
+                      uid: spot.uid,
+                      vicinity: name,
+                      rating: spot.rating,
+                      totalRatings: spot.totalRatings,
                       })
                     }
                   >
                     <span className="mr-2">
                       <SaveIcon />
                     </span>
-                    <span>Save location</span>
+                    <span>Save</span>
                   </button>
                 </div>
               </div>
             )
           })}
+        </Fade>
       </div>
     </div>
   )
