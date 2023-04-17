@@ -22,3 +22,37 @@ body {
       radial-gradient(at 46% 0%, hsla(133,89%,65%,1) 0px, transparent 50%),
       url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='7.4' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
+
+.ratings-wrapper {
+  position: relative;
+  vertical-align: middle;
+  display: inline-block;
+  color: #b1b1b1;
+  overflow: hidden;
+}
+
+.filled-stars {
+  color: #ffb300;
+  position: absolute;
+  left: 0;
+  top: 0;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.empty-stars:before, 
+.filled-stars:before {
+  content:"\2605\2605\2605\2605\2605";
+  font-size: 14px;
+}
+
+.save-btn {
+  opacity: 1;
+  transition: opacity 3s ease-in-out;
+}
+
+.fade-out {
+  opacity: 0 !important;
+  pointer-events: none;
+  overflow: hidden;
+}

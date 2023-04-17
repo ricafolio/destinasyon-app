@@ -21,9 +21,14 @@ export interface SpotProps extends Spot {
   onDeleteBtnClick: (...args: DeleteSpotArgs[]) => void
 }
 
+export interface FetchStatus {
+  isLoading: boolean
+  source: "random" | "submit" | null
+}
+
 export interface InputProps {
   prompt: string
-  isFetching: boolean
+  fetchStatus: FetchStatus
   onRandomBtnClick: () => void
   onSubmitBtnClick: () => void
   onPromptValueChange: (...args: PromptValueChangeArgs[]) => void
