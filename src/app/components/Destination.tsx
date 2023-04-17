@@ -30,6 +30,14 @@ export default function Destination({ name, description, spots, index, onSaveBtn
       }
     }
 
+   // fetch image url for each spot with a null image
+   spots.map((spot: Spot) => {
+      if (!spot.imageUrl) {
+        fetchImageUrl(spot)
+      }
+    })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <div className="text-left mb-24">
