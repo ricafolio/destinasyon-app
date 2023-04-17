@@ -1,5 +1,9 @@
 # Destinasyon
-Welcome to the Destinasyon repository! ✨ This is a travel destination finder app that uses AI technology to suggest the best travel destinations in the Philippines. The app is built with Next.js, React, Tailwind CSS, and powered by OpenAI and Google Places API.
+Welcome to the Destinasyon repository! ✨ 
+
+This is a travel destination finder app that uses AI technology to suggest the best travel destinations in the Philippines. The app is built with Next.js, React, Tailwind CSS, and powered by OpenAI and Google Places API.
+
+![Destinasyon UI](https://i.imgur.com/SLtvsCz.png)
 
 ## Prerequisites
 To run this project, you will need to have Node.js installed on your local machine. You will also need to create an `.env.local` file with the necessary API keys.
