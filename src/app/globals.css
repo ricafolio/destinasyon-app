@@ -45,3 +45,14 @@ body {
   content:"\2605\2605\2605\2605\2605";
   font-size: 14px;
 }
+
+.save-btn {
+  opacity: 1;
+  transition: opacity 3s ease-in-out;
+}
+
+.fade-out {
+  opacity: 0 !important;
+  pointer-events: none;
+  overflow: hidden;
+}

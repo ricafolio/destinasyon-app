@@ -23,12 +23,26 @@ export default function DestinationSpot({
   onSaveBtnClick
 }: SpotExtended) {
   const [saved, setSaved] = useState<boolean>(false)
-  const [permanentlyHidden, setPermanentlyHidden] = useState<boolean>(false)
+  const [opacityHidden, setOpacityHidden] = useState<boolean>(false)
 
-  function permanentlyHideAfterSave() {
-    setTimeout(() => {
-      setPermanentlyHidden(true)
-    }, 4000)
+  function handleSaveBtnClick() {
+    onSaveBtnClick({
+      name: name,
+      description: description,
+      imageUrl: imageUrl || "./empty.svg",
+      mapsUrl: mapsUrl,
+      uid: uid,
+      vicinity: vicinity,
+      rating: rating,
+      totalRatings: totalRatings
+    })
+    // changes to green button
+    setSaved(true)
+
+    // fires 3s CSS animation 
+    // also forces to display the element even on mouseout 
+    // because the element only appears on hover, we can't see the fade out on mouseout
+    setOpacityHidden(true)
   }
 
   return (
@@ -55,23 +69,10 @@ export default function DestinationSpot({
         <p className="text-sm text-gray-700 mt-1 mb-2 md:mb-0">{description}</p>
       </section>
 
-      <div className={`${!permanentlyHidden ? "group-hover:block" : "group-hover:hidden"} hidden absolute top-0 right-2 my-2`}>
+      <div className={`save-btn ${opacityHidden ? "fade-out !block" : "hidden"} group-hover:block absolute top-0 right-2 my-2`}>
         <button
           className={`${!saved ? "bg-red-700 hover:bg-red-800" : "bg-green-600"} text-white px-4 py-2 rounded transition-colors duration-200 inline-flex items-center justify-center`}
-          onClick={() => {
-            onSaveBtnClick({
-              name: name,
-              description: description,
-              imageUrl: imageUrl || "./empty.svg",
-              mapsUrl: mapsUrl,
-              uid: uid,
-              vicinity: vicinity,
-              rating: rating,
-              totalRatings: totalRatings
-            })
-            setSaved(true)
-            permanentlyHideAfterSave()
-          }}
+          onClick={handleSaveBtnClick}
           disabled={saved}
         >
           <span className="mr-1">{!saved ? <SaveIcon /> : <CheckIcon />}</span>
