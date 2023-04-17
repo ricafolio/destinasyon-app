@@ -44,13 +44,13 @@ export default function Destination({ name, description, spots, index, onSaveBtn
 
   return (
     <div className="text-left mb-24">
-      <div className="px-2 mb-4">
-        <h1 className="text-white text-3xl font-bold">{name}</h1>
-        <p className="text-gray-200 text-lg mt-2">{description}</p>
+      <div className="mb-4">
+        <h1 className="text-white text-2xl sm:text-3xl font-bold">{name}</h1>
+        <p className="text-gray-200 text-base sm:text-lg mt-2">{description}</p>
       </div>
 
       <div className="w-full flex flex-row flex-wrap gap-2">
-        <Fade cascade={true} damping={0.5} className="group w-full sm:w-[calc(50%_-_8px)] lg:w-[calc(33.33%_-_8px)] flex flex-col bg-white rounded-lg relative">
+        <Fade triggerOnce={true} cascade={true} damping={0.5} className="group w-full sm:w-[calc(50%_-_8px)] lg:w-[calc(33.33%_-_8px)] flex flex-col bg-white rounded-lg relative">
           {updatedSpots.map((spot: Spot, i: number) => {
             return (
               <div key={`spot-${index}-${i}`}>
@@ -60,29 +60,29 @@ export default function Destination({ name, description, spots, index, onSaveBtn
                     alt={spot.name} 
                     fill={true} 
                     style={{ objectFit: "cover" }} 
-                    className="w-full rounded-t-md transition duration-300 ease-in-out hover:brightness-90" 
+                    className="w-full rounded-t-md" 
                   />
                 </div>
 
-                <section className="px-3 pt-1 pb-4">
+                <section className="px-3 pt-1 pb-2 sm:pb-4">
                   <h2 className="text-xl font-semibold text-black">
                     <a href={spot.mapsUrl} target="_blank" rel="noreferrer" className="transition-colors duration-200 hover:text-gray-600 inline-block cursor-pointer">
                       <span>
                         {spot.name} 
-                        <span className="inline-block align-middle hover:scale-100 ml-1">
+                        <span className="inline-block align-middle text-gray-400 hover:scale-100 ml-1">
                           <ExternalIcon />
                         </span>
                       </span>
                     </a>
                   </h2>
-                  <p className="text-sm text-gray-700 mt-2 mb-2 md:mb-0">
+                  <p className="text-sm text-gray-700 mt-1 mb-2 md:mb-0">
                     {spot.description}
                   </p>
                 </section>
 
                 <div className="group-hover:block hidden absolute top-0 right-2 my-2">
                   <button
-                    className="bg-red-700 hover:bg-red-800 text-white px-5 py-3 rounded transition-colors inline-flex items-center justify-center"
+                    className="bg-red-700 hover:bg-red-800 text-white px-4 py-2 rounded transition-colors duration-200 inline-flex items-center justify-center"
                     onClick={() =>
                       onSaveBtnClick({
                       name: spot.name,
@@ -96,7 +96,7 @@ export default function Destination({ name, description, spots, index, onSaveBtn
                       })
                     }
                   >
-                    <span className="mr-2">
+                    <span className="mr-1">
                       <SaveIcon />
                     </span>
                     <span>Save</span>

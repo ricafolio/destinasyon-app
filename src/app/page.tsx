@@ -172,11 +172,7 @@ This might take a while.`)
         </p>
       )}
 
-      <div ref={resultsRef} className="w-full rounded-xl mt-4 scroll-mt-4">
-        {result.length > 0 && (
-          <h2 className="font-bold text-3xl sm:text-4xl mt-16 mb-8">Check out these destinations!</h2>
-        )}
-
+      <div ref={resultsRef} className="w-full rounded-xl mt-12 scroll-mt-4">
         {result?.map((destination, i) => {
           return (
             <Destination 
