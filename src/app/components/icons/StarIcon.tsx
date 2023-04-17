@@ -9,7 +9,7 @@ export default function StarIcon({ rating, totalRatings } : { rating: number, to
         <div className="empty-stars"></div>
         <div className="filled-stars" style={{ width: `${ratingPercentage}%` }}></div>
       </div>
-      <div className="text-gray-500 text-sm ml-1">
+      <div className="text-gray-500 text-xs ml-1">
         ({totalRatings ? totalRatings : 0})
       </div>
     </div>
