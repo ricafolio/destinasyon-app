@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { Fade } from "react-awesome-reveal";
 import { Spot } from "../types"
 import { DestinationProps } from "../types/props"
-import DestinationSpot from "./DestinationSpot";
+import DestinationSpot from "./DestinationSpot"
 
 export default function Destination({ name, description, spots, index, onSaveBtnClick }: DestinationProps) {
   const [updatedSpots, setUpdatedSpots] = useState<Spot[]>([])
@@ -13,15 +13,27 @@ export default function Destination({ name, description, spots, index, onSaveBtn
       try {
         const response = await fetch(`/api/find-place?query=${spot.name}, ${name}`)
         const { data } = await response.json()
-        const newSpot = {
+        let newSpot = {
+          id: "", // intended, filled later on click
           name: spot.name,
           description: spot.description,
-          imageUrl: data.imageUrl,
-          mapsUrl: data.mapsUrl,
-          uid: data.uid,
           vicinity: name,
-          rating: data.rating,
-          totalRatings: data.totalRatings
+          imageUrl: "./empty.svg",
+          mapsUrl: `https://www.google.com/maps/search/${spot.name}`,
+          rating: 0,
+          totalRatings: 0 
+        }
+        if (data) {
+          newSpot = {
+            id: "",
+            name: spot.name,
+            description: spot.description,
+            vicinity: name,
+            imageUrl: data.imageUrl,
+            mapsUrl: data.mapsUrl,
+            rating: data.rating,
+            totalRatings: data.totalRatings
+          }
         }
         // render more info from API
         setUpdatedSpots((prevSpot) => [...prevSpot, newSpot])
@@ -32,9 +44,7 @@ export default function Destination({ name, description, spots, index, onSaveBtn
 
    // fetch image url for each spot with a null image
    spots.map((spot: Spot) => {
-      if (!spot.imageUrl) {
-        fetchImageUrl(spot)
-      }
+      fetchImageUrl(spot)
     })
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -52,11 +62,11 @@ export default function Destination({ name, description, spots, index, onSaveBtn
             return (
               <DestinationSpot
                 key={`spot-${index}-${i}`}
+                id={spot.id}
                 name={spot.name}
                 description={spot.description}
                 imageUrl={spot.imageUrl}
                 mapsUrl={spot.mapsUrl}
-                uid={spot.uid}
                 vicinity={spot.vicinity}
                 rating={spot.rating}
                 totalRatings={spot.totalRatings}

@@ -30,11 +30,11 @@ export interface APIResponse {
 // ------
 
 export interface Spot {
+  id: string
   name: string
   description: string
   imageUrl: string
   mapsUrl: string
-  uid: string
   vicinity: string
   rating: number
   totalRatings: number
@@ -51,5 +51,5 @@ export interface Destination {
 export interface SpotState {
   spots: Spot[]
   addSpot: (newSpot: Spot) => void
-  deleteSpotByID: (uid: string) => void
+  deleteSpotByID: (id: string) => void
 }

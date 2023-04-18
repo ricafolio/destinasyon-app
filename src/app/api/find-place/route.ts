@@ -19,6 +19,7 @@ async function fetchPlaceBasicInfo(placeName: string) {
 }
 
 async function fetchPlaceDetails(placeID: string) {
+  // not using this api anymore to save credits ;(
   const searchDetailsUrl = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeID}&key=${GOOGLE_PLACES_API_KEY}`
   const searchDetailsRes = await fetch(searchDetailsUrl, { method: "GET" })
   const searchResults = await searchDetailsRes.json()
@@ -41,53 +42,48 @@ async function fetchPlacePhotoUrl(photoId: string) {
 
 export async function GET(request: Request) {
   try {
-    // expected url: /api/find-place?query=place+name
     const { searchParams } = new URL(request.url)
     const placeName: string | null = searchParams.get("query")
 
+    // Check expected url: /api/find-place?query=place+name
     if (!placeName) {
       throw new Error("Query params not found!")
     }
 
+    // [API REQUEST] initial search if place exists
     const placeInfo = await fetchPlaceBasicInfo(placeName || "")
+    const placeUrl = `https://www.google.com/maps/search/${placeName}`
 
     if (placeInfo.length === 0) {
-      throw new Error("Place not found") 
+      // return a generic result for a place that can't be found on google maps
+      return NextResponse.json({
+        status: "ok",
+        data: {
+          imageUrl: "./empty.svg",
+          mapsUrl: placeUrl,
+          rating: 0,
+          totalRatings: 0
+        }
+      })
     }
 
-    const placeID = placeInfo[0].reference
-    const placeRating = placeInfo[0].rating
-    const placeRatingsTotal = placeInfo[0].user_ratings_total
+    // expand place details
+    // const placeID: string = placeInfo[0].reference
+    const placeRating: number = placeInfo[0].rating
+    const placeRatingsTotal: number = placeInfo[0].user_ratings_total
+    let placePhoto: string | null = "./empty.svg"
 
-    let placePhoto: string | null = null
-    let placeUrl: string | null = null
-
-    // get photo using reference id
+    // [API REQUEST] get photo using reference id
     if (placeInfo[0].photos) {
       const photoId = placeInfo[0].photos[0].photo_reference
       placePhoto = await fetchPlacePhotoUrl(photoId)
-    } else {
-      throw new Error("Place image not found") 
-    }
-
-    // place more details
-    if (placeID) {
-      let placeDetails = await fetchPlaceDetails(placeID)
-
-      if (!placeDetails.url) {
-        throw new Error("Place details not found")
-      }
-
-      placeUrl = placeDetails.url
     }
 
     return NextResponse.json({
       status: "ok",
-      message: "Place found",
       data: {
         imageUrl: placePhoto,
         mapsUrl: placeUrl,
-        uid: placeID,
         rating: placeRating,
         totalRatings: placeRatingsTotal
       }
@@ -103,7 +99,6 @@ export async function GET(request: Request) {
 
     return NextResponse.json({
       status: "error",
-      message: message,
       data: null
     }, { status: 400 })
   }

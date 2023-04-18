@@ -23,7 +23,7 @@ export async function POST(req: Request) {
       temperature = 0.6
       chatPrompt = `You are thinking about your next dream trip.
 
-      Pick a random outdoor activity. Pick a random location between Luzon, Visayas or Mindanao.
+      Pick a super random, unusual outdoor activity. Pick a random location between Luzon, Visayas or Mindanao.
 
       Write in first person POV. Maximum of 2 sentences. Use modal verbs of desire.`
     } 
@@ -61,7 +61,7 @@ export async function POST(req: Request) {
                 name: "",
                 description: "",
                 imageUrl: null,
-                uid: null,
+                id: null,
                 vicinity: null,
                 mapsUrl: null,
                 rating: null,
@@ -72,7 +72,7 @@ export async function POST(req: Request) {
         ]
       }
       \`\`\`
-      Do not add value on null properties, specifically \`imageUrl\`, \`uid\`, \`vicinity\`, \`mapsUrl\`, \`rating\` and \`totalRatings\`.
+      Do not add value on null properties, specifically \`imageUrl\`, \`id\`, \`vicinity\`, \`mapsUrl\`, \`rating\` and \`totalRatings\`.
       `
     }
 
