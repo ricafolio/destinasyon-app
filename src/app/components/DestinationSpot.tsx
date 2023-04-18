@@ -12,11 +12,11 @@ interface SpotExtended extends Spot {
 }
 
 export default function DestinationSpot({
+  id,
   name,
   description,
   imageUrl,
   mapsUrl,
-  uid,
   vicinity,
   rating,
   totalRatings,
@@ -27,14 +27,14 @@ export default function DestinationSpot({
 
   function handleSaveBtnClick() {
     onSaveBtnClick({
-      name: name,
-      description: description,
-      imageUrl: imageUrl || "./empty.svg",
-      mapsUrl: mapsUrl,
-      uid: uid,
-      vicinity: vicinity,
-      rating: rating,
-      totalRatings: totalRatings
+      id,
+      name,
+      description,
+      imageUrl,
+      mapsUrl,
+      vicinity,
+      rating,
+      totalRatings
     })
     // changes to green button
     setSaved(true)

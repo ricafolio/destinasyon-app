@@ -9,19 +9,31 @@ export default function Destination({ name, description, spots, index, onSaveBtn
 
   useEffect(() => {
     // run once on mount
-    const fetchImageUrl = async (spot: Spot) => {
+    const fetchImageUrl = async (spot: Spot, i: number) => {
       try {
         const response = await fetch(`/api/find-place?query=${spot.name}, ${name}`)
         const { data } = await response.json()
-        const newSpot = {
+        let newSpot = {
+          id: i,
           name: spot.name,
           description: spot.description,
-          imageUrl: data.imageUrl,
-          mapsUrl: data.mapsUrl,
-          uid: data.uid,
           vicinity: name,
-          rating: data.rating,
-          totalRatings: data.totalRatings
+          imageUrl: "./empty.svg",
+          mapsUrl: `https://www.google.com/maps/search/${spot.name}`,
+          rating: 0,
+          totalRatings: 0 
+        }
+        if (data) {
+          newSpot = {
+            id: i,
+            name: spot.name,
+            description: spot.description,
+            vicinity: name,
+            imageUrl: data.imageUrl,
+            mapsUrl: data.mapsUrl,
+            rating: data.rating,
+            totalRatings: data.totalRatings
+          }
         }
         // render more info from API
         setUpdatedSpots((prevSpot) => [...prevSpot, newSpot])
@@ -31,9 +43,9 @@ export default function Destination({ name, description, spots, index, onSaveBtn
     }
 
    // fetch image url for each spot with a null image
-   spots.map((spot: Spot) => {
+   spots.map((spot: Spot, i: number) => {
       if (!spot.imageUrl) {
-        fetchImageUrl(spot)
+        fetchImageUrl(spot, i)
       }
     })
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -52,11 +64,11 @@ export default function Destination({ name, description, spots, index, onSaveBtn
             return (
               <DestinationSpot
                 key={`spot-${index}-${i}`}
+                id={spot.id}
                 name={spot.name}
                 description={spot.description}
                 imageUrl={spot.imageUrl}
                 mapsUrl={spot.mapsUrl}
-                uid={spot.uid}
                 vicinity={spot.vicinity}
                 rating={spot.rating}
                 totalRatings={spot.totalRatings}

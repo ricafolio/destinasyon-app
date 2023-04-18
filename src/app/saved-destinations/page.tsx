@@ -19,8 +19,8 @@ export default function MySavedDestinations() {
     setMounted(true)
   }, [])
 
-  function handleDeleteBtnClick({ uid, name }: DeleteSpotArgs) {
-    deleteSpotByID(uid)
+  function handleDeleteBtnClick({ id, name }: DeleteSpotArgs) {
+    deleteSpotByID(id)
     toast.success(`${name} deleted.`)
   }
 
@@ -44,16 +44,16 @@ export default function MySavedDestinations() {
         {spots.length > 0 ? spots.map((spot: Spot, i: number) => {
           return (
             <DestinationSaved
+              id={spot.id}
               name={spot.name}
               description={spot.description}
               imageUrl={spot.imageUrl}
               mapsUrl={spot.mapsUrl}
-              uid={spot.uid}
               vicinity={spot.vicinity}
               rating={spot.rating}
               totalRatings={spot.totalRatings}
               onDeleteBtnClick={handleDeleteBtnClick}
-              key={`spot-saved-${spot.uid}-${i}`}
+              key={`spot-saved-${spot.id}-${i}`}
             />
           )
         }) : <div className="w-full py-24 text-center">

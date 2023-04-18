@@ -61,7 +61,7 @@ export async function POST(req: Request) {
                 name: "",
                 description: "",
                 imageUrl: null,
-                uid: null,
+                id: null,
                 vicinity: null,
                 mapsUrl: null,
                 rating: null,
@@ -72,7 +72,7 @@ export async function POST(req: Request) {
         ]
       }
       \`\`\`
-      Do not add value on null properties, specifically \`imageUrl\`, \`uid\`, \`vicinity\`, \`mapsUrl\`, \`rating\` and \`totalRatings\`.
+      Do not add value on null properties, specifically \`imageUrl\`, \`id\`, \`vicinity\`, \`mapsUrl\`, \`rating\` and \`totalRatings\`.
       `
     }
 

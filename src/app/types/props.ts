@@ -7,7 +7,7 @@ export interface PromptValueChangeArgs {
 }
 
 export interface DeleteSpotArgs {
-  uid: string,
+  id: number,
   name: string
 }
 

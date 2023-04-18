@@ -149,14 +149,14 @@ This might take a while.`)
     if (isClear) toast.success("Cleared")
   }
 
-  function handleSaveBtnClick({ name, description, imageUrl, mapsUrl, uid, vicinity, rating, totalRatings }: Spot) {
+  function handleSaveBtnClick({ id, name, description, imageUrl, mapsUrl, vicinity, rating, totalRatings }: Spot) {
     addSpot(
       {
+        id,
         name,
         description,
         imageUrl,
         mapsUrl,
-        uid,
         vicinity,
         rating,
         totalRatings,

@@ -4,9 +4,9 @@ import DeleteIcon from "./icons/DeleteIcon"
 import ExternalIcon from "./icons/ExternalIcon"
 import StarIcon from "./icons/StarIcon"
 
-export default function DestinationSaved({ name, description, imageUrl, mapsUrl, uid, vicinity, rating, totalRatings, onDeleteBtnClick }: SpotProps) {
+export default function DestinationSaved({ id, name, description, imageUrl, mapsUrl, vicinity, rating, totalRatings, onDeleteBtnClick }: SpotProps) {
   return (
-    <div className="w-full sm:w-[calc(50%_-_8px)] lg:w-[calc(33.33%_-_8px)] flex flex-col items-start rounded-md bg-white text-black relative group" key={`saved-spot-${uid}`}>
+    <div className="w-full sm:w-[calc(50%_-_8px)] lg:w-[calc(33.33%_-_8px)] flex flex-col items-start rounded-md bg-white text-black relative group" key={`saved-spot-${id}`}>
       <div className="text-left">
         <div className="w-full h-48 relative bg-gray-100 rounded-md">
           <Image
@@ -40,7 +40,7 @@ export default function DestinationSaved({ name, description, imageUrl, mapsUrl,
       </div>
 
       <div className="group-hover:block hidden absolute top-2 right-2">
-        <button className="bg-red-600 hover:bg-red-500 text-white px-4 py-2 rounded transition-colors inline-flex items-center justify-center" onClick={() => onDeleteBtnClick({ uid, name })}>
+        <button className="bg-red-600 hover:bg-red-500 text-white px-4 py-2 rounded transition-colors inline-flex items-center justify-center" onClick={() => onDeleteBtnClick({ id, name })}>
           <DeleteIcon />
         </button>
       </div>
