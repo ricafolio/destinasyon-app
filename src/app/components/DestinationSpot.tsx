@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Spot } from "../types"
 import Image from "next/image"
+import shortUUID from "short-uuid"
 
 import SaveIcon from "./icons/SaveIcon"
 import ExternalIcon from "./icons/ExternalIcon"
@@ -12,7 +13,6 @@ interface SpotExtended extends Spot {
 }
 
 export default function DestinationSpot({
-  id,
   name,
   description,
   imageUrl,
@@ -27,7 +27,7 @@ export default function DestinationSpot({
 
   function handleSaveBtnClick() {
     onSaveBtnClick({
-      id,
+      id: shortUUID.generate(),
       name,
       description,
       imageUrl,

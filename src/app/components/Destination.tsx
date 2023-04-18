@@ -2,19 +2,19 @@ import { useState, useEffect } from "react"
 import { Fade } from "react-awesome-reveal";
 import { Spot } from "../types"
 import { DestinationProps } from "../types/props"
-import DestinationSpot from "./DestinationSpot";
+import DestinationSpot from "./DestinationSpot"
 
 export default function Destination({ name, description, spots, index, onSaveBtnClick }: DestinationProps) {
   const [updatedSpots, setUpdatedSpots] = useState<Spot[]>([])
 
   useEffect(() => {
     // run once on mount
-    const fetchImageUrl = async (spot: Spot, id: string) => {
+    const fetchImageUrl = async (spot: Spot) => {
       try {
         const response = await fetch(`/api/find-place?query=${spot.name}, ${name}`)
         const { data } = await response.json()
         let newSpot = {
-          id: i,
+          id: "", // intended, filled later on click
           name: spot.name,
           description: spot.description,
           vicinity: name,
@@ -25,7 +25,7 @@ export default function Destination({ name, description, spots, index, onSaveBtn
         }
         if (data) {
           newSpot = {
-            id: i,
+            id: "",
             name: spot.name,
             description: spot.description,
             vicinity: name,
@@ -43,10 +43,8 @@ export default function Destination({ name, description, spots, index, onSaveBtn
     }
 
    // fetch image url for each spot with a null image
-   spots.map((spot: Spot, i: number) => {
-      if (!spot.imageUrl) {
-        fetchImageUrl(spot, i)
-      }
+   spots.map((spot: Spot) => {
+      fetchImageUrl(spot)
     })
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
