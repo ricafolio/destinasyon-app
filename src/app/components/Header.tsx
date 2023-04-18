@@ -5,6 +5,7 @@ import { erode } from "../fonts"
 import Link from "next/link"
 import NavLink from "./NavLink"
 import MenuOpen from "./icons/MenuOpen"
+import MenuClose from "./icons/MenuClose"
 
 export default function Header() {
   const [open, setOpen] = useState<boolean>(false)
@@ -22,7 +23,7 @@ export default function Header() {
 
         <div className="w-1/2 sm:hidden flex justify-end">
           <button onClick={() => setOpen(!open)} className="transition-colors duration-200 bg-zinc-800 hover:bg-zinc-800/80 rounded px-1">
-            <MenuOpen />
+            <span className="block p-1">{open ? <MenuClose /> : <MenuOpen />}</span>
           </button>
         </div>
       </div>
