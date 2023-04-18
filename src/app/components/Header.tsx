@@ -16,7 +16,7 @@ export default function Header() {
         <NavLink id="help" name="Help" link="/help" />
       </div>
 
-      <div className="w-full sm:flex-1 md:w-1/3 order-1 md:order-2 mb-2 sm:mb-0 flex items-center justify-center sm:justify-start md:justify-center pl-0 sm:pl-2 md:pl-0 h-auto">
+      <div className="w-full sm:flex-1 md:w-1/3 order-1 md:order-2 mb-2 sm:mb-0 flex items-center justify-center sm:justify-start md:justify-center pl-1 sm:pl-2 md:pl-0 h-auto">
         <Link href="/" className={`w-1/2 sm:w-auto text-2xl transition-all duration-300 font-bold select-none cursor-pointer inline-block text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-red-300 via-amber-300 to-purple-500 hover:brightness-90 ${erode.className}`}>
           Destinasyon.app
         </Link>
