@@ -9,7 +9,7 @@ export default function Destination({ name, description, spots, index, onSaveBtn
 
   useEffect(() => {
     // run once on mount
-    const fetchImageUrl = async (spot: Spot, i: number) => {
+    const fetchImageUrl = async (spot: Spot, id: string) => {
       try {
         const response = await fetch(`/api/find-place?query=${spot.name}, ${name}`)
         const { data } = await response.json()

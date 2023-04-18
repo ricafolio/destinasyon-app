@@ -14,7 +14,7 @@ export const useSpotStore = create<SpotState, [["zustand/persist", SpotState]]>(
           ]
         })
       },
-      deleteSpotByID: (id: number) => {
+      deleteSpotByID: (id: string) => {
         set({ 
           spots: get().spots.filter((spot: Spot) => spot.id !== id)
         })
