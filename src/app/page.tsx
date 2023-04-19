@@ -63,17 +63,22 @@ export default function Home() {
         }
       }
 
-      const content = eval("(" + data.result.choices[0].message.content + ")")
+      let content = null
+      try {
+        content = eval("(" + data.result.choices[0].message.content + ")")
+      } catch {
+        throw new Error("Sorry, please try again with different prompt!")
+      }
 
-      if (content.success) {
+      if (content && content.success) {
         setResult(content.data)
         toast.success("Enjoy these results! ✨", { id: toastStatus })
         resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
       } else {
-        throw new Error("Sorry, please try again with different prompt.")
+        throw new Error("Sorry, please try again with different prompt!")
       }
     } catch (error) {
-      const message = error instanceof Error ? error.message : "Sorry, please try again with different prompt."
+      const message = error instanceof Error ? error.message : String(error)
       toast.error(message, { id: toastStatus })
     }
 
