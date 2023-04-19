@@ -3,8 +3,8 @@ import Header from "./components/Header"
 import { switzer } from "./fonts"
 
 export const metadata = {
-  title: "Destinasyon | Discover Travel Destinations in the Philippines",
-  description: "Destinasyon is a travel destination finder app that uses AI technology to suggest the best travel destinations in the Philippines."
+  title: "Destinasyon | AI-Powered Travel Destinations Finder",
+  description: "Destinasyon is a travel destination finder app that uses AI technology to suggest the best travel destinations for you."
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
