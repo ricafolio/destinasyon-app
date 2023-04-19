@@ -5,7 +5,7 @@ export default function Help() {
   const faqs = [
     {
       question: "What is the app about?",
-      answer: "This app is a travel destination discovery platform that utilizes AI to help users find the best travel destinations in the Philippines based on their specified interests."
+      answer: "This app is a travel destination discovery platform that utilizes AI to help users find the best travel destinations based on their specified interests."
     },
     {
       question: 'What is "Destinasyon"?',
