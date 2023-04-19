@@ -20,6 +20,10 @@ export default function Help() {
       answer: "We do not store any user data on our servers, with the exception of the saved destinations which are stored locally in the user's browser. This means that only the user who saved the destinations can access and view them."
     },
     {
+      question: "Help! I'm getting rate limited error.",
+      answer: "Since I'm only using the free version of the OpenAI API, there are restrictions on the number of requests that can be made within a certain time period. This limit becomes more challenging to work with when there are multiple users. To resolve the issue, you can try making the request again after waiting for a few seconds. 🙏"
+    },
+    {
       question: "Can I provide feedback or report issues?",
       answer: "Sure! I am always looking for ways to improve the app and make it more useful."
     },
