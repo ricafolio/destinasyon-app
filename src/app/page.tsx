@@ -26,78 +26,83 @@ export default function Home() {
       return
     }
 
-    if (!fetchStatus.isLoading) {
-      const toastStatus = toast.loading(`Finding best destinations for you...
-This might take a while.`)
-      setFetchStatus({
-        isLoading: true,
-        source: "submit"
-      })
+    if (fetchStatus.isLoading) {
+      return
+    }
 
+    const toastStatus = toast.loading(`Finding best destinations for you... \n This might take a while.`)
+    
+    setFetchStatus({
+      isLoading: true,
+      source: "submit"
+    })
+
+    try {
       const response = await fetch("/api/prompt", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+        "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          action: "submit",
-          prompt: prompt
+        action: "submit",
+        prompt: prompt
         })
       })
-      const data = await response.json()
-
-      // error handling
-      let error_msg = null
 
       if (!response.ok) {
-        error_msg = data.message
+        throw new Error("An error occurred while submitting the request. Please try again later.")
       }
+
+      const data = await response.json()
 
       if (data.result["error"]) {
         if (data.result["error"].type === "requests") {
-          error_msg = "Rate limit reached! Please try again in a minute."
+        throw new Error("Rate limit reached! Please try again in a minute.")
         } else {
-          error_msg = "Unknown error has occurred! Please try again."
+        throw new Error("An unknown error has occurred! Please try again later.")
         }
       }
 
-      if (error_msg) {
-        toast.error(error_msg, { id: toastStatus })
-        setFetchStatus({
-          isLoading: false,
-          source: null
-        })
-        return
+      let content = null
+      try {
+        content = eval("(" + data.result.choices[0].message.content + ")")
+      } catch {
+        throw new Error("Sorry, please try again with different prompt!")
       }
 
-      // prays
-      const content = eval("(" + data.result.choices[0].message.content + ")")
-
-      if (content.success) {
-        toast.success("Enjoy these results! ✨", { id: toastStatus })
+      if (content && content.success) {
         setResult(content.data)
-        // scroll down
+        toast.success("Enjoy these results! ✨", { id: toastStatus })
         resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
       } else {
-        toast.error("Sorry, please try again with different prompt.", { id: toastStatus })
+        throw new Error("Sorry, please try again with different prompt!")
       }
-
-      setFetchStatus({
-        isLoading: false,
-        source: null
-      })
-      return
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error)
+      toast.error(message, { id: toastStatus })
     }
+
+    setFetchStatus({
+      isLoading: false,
+      source: null
+    })
+
+    return
   }
 
   async function generateRandomPrompt() {
-    if (!fetchStatus.isLoading) {
-      const toastStatus = toast.loading("Generating random prompt...")
-      setFetchStatus({
-        isLoading: true,
-        source: "random"
-      })
+    if (fetchStatus.isLoading) {
+      return
+    }
 
+    const toastStatus = toast.loading("Generating random prompt...")
+
+    setFetchStatus({
+      isLoading: true,
+      source: "random"
+    })
+
+    try {
       const response = await fetch("/api/prompt", {
         method: "POST",
         headers: {
@@ -107,41 +112,34 @@ This might take a while.`)
           action: "random"
         })
       })
-      const data = await response.json()
-
-      // error handling
-      let error_msg = null
 
       if (!response.ok) {
-        error_msg = data.message
+        throw new Error("An error occurred while submitting the request. Please try again later.")
       }
+
+      const data = await response.json()
 
       if (data.result["error"]) {
         if (data.result["error"].type === "requests") {
-          error_msg = "Rate limit reached! Please try again in a minute."
+          throw new Error("Rate limit reached! Please try again in a minute.")
         } else {
-          error_msg = "Unknown error has occurred! Please try again."
+          throw new Error("Unknown error has occurred! Please try again later.")
         }
       }
 
-      if (error_msg) {
-        toast.error(error_msg, { id: toastStatus })
-        setFetchStatus({
-          isLoading: false,
-          source: null
-        })
-        return
-      }
-
-      // success
-      toast.success("Random prompt generated!", { id: toastStatus })
       setPrompt(data.result.choices[0].message.content)
-      setFetchStatus({
-        isLoading: false,
-        source: null
-      })
-      return
+      toast.success("Random prompt generated!", { id: toastStatus })
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error)
+      toast.error(message, { id: toastStatus })
     }
+
+    setFetchStatus({
+      isLoading: false,
+      source: null
+    })
+
+    return
   }
 
   function handlePromptValueChange({ newValue, isClear }: PromptValueChangeArgs) {
