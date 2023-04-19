@@ -19,6 +19,7 @@ export type FormActionType = "submit" | "random"
 export interface FormBodyContent {
   action: FormActionType
   prompt: string
+  location: "world" | "philippines"
 }
 
 export interface APIResponse {

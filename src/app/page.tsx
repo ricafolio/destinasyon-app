@@ -41,7 +41,8 @@ This might take a while.`)
         },
         body: JSON.stringify({
           action: "submit",
-          prompt: prompt
+          prompt: prompt,
+          location: "philippines"
         })
       })
       const data = await response.json()
@@ -104,7 +105,8 @@ This might take a while.`)
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          action: "random"
+          action: "random",
+          location: "philippines"
         })
       })
       const data = await response.json()
