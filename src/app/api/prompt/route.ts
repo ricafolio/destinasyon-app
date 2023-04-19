@@ -42,7 +42,7 @@ export async function POST(req: Request) {
       - The input should be enough to allow the app to make recommendations.
 
       If the conditions are unmet, stop completely. Just reply the following code:
-      { success: false, data: null }
+      { success: false, explanation: "", data: null }
 
       2. Find me three random travel destinations in the Philippines with that input. If there"s specific place mentioned in input, just search within that place.
 
