@@ -27,65 +27,57 @@ export default function Home() {
     }
 
     if (!fetchStatus.isLoading) {
-      const toastStatus = toast.loading(`Finding best destinations for you...
-This might take a while.`)
+      const toastStatus = toast.loading(`Finding best destinations for you... \n This might take a while.`)
       setFetchStatus({
         isLoading: true,
         source: "submit"
       })
 
-      const response = await fetch("/api/prompt", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          action: "submit",
-          prompt: prompt
+      try {
+        const response = await fetch("/api/prompt", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            action: "submit",
+            prompt: prompt
+          })
         })
-      })
-      const data = await response.json()
 
-      // error handling
-      let error_msg = null
-
-      if (!response.ok) {
-        error_msg = data.message
-      }
-
-      if (data.result["error"]) {
-        if (data.result["error"].type === "requests") {
-          error_msg = "Rate limit reached! Please try again in a minute."
-        } else {
-          error_msg = "Unknown error has occurred! Please try again."
+        if (!response.ok) {
+          throw new Error("An error occurred while submitting the request. Please try again later.")
         }
-      }
 
-      if (error_msg) {
-        toast.error(error_msg, { id: toastStatus })
-        setFetchStatus({
-          isLoading: false,
-          source: null
-        })
-        return
-      }
+        const data = await response.json()
 
-      // prays
-      const content = eval("(" + data.result.choices[0].message.content + ")")
+        if (data.result["error"]) {
+          if (data.result["error"].type === "requests") {
+            throw new Error("Rate limit reached! Please try again in a minute.")
+          } else {
+            throw new Error("An unknown error has occurred! Please try again later.")
+          }
+        }
 
-      if (content.success) {
-        toast.success("Enjoy these results! ✨", { id: toastStatus })
-        setResult(content.data)
-        // scroll down
-        resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
-      } else {
-        toast.error("Sorry, please try again with different prompt.", { id: toastStatus })
+        const content = eval("(" + data.result.choices[0].message.content + ")")
+
+        if (content.success) {
+          setResult(content.data)
+          toast.success("Enjoy these results! ✨", { id: toastStatus })
+          resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
+        } else {
+          throw new Error("Sorry, please try again with different prompt.")
+        }
+      } catch (error) {
+        const message = error instanceof Error ? error.message : "Sorry, please try again with different prompt."
+        toast.error(message, { id: toastStatus })
       }
 
       setFetchStatus({
         isLoading: false,
         source: null
       })
+
       return
     }
   }
