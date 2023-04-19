@@ -20,10 +20,12 @@ export async function POST(req: Request) {
     let chatPrompt: string = prompt || ""
 
     if (action === "random") {
-      temperature = 0.6
+      temperature = 0.5
       chatPrompt = `You are thinking about your next dream trip.
 
-      Pick a super random, unusual outdoor activity. Pick a random location between Luzon, Visayas or Mindanao.
+      Pick a super random, unusual outdoor activity. Avoid activities that require specific geographic or climatic features that cannot be done in the Philippines.
+
+      Pick a random location between Luzon, Visayas or Mindanao. Avoid inaccessible places.
 
       Write in first person POV. Maximum of 2 sentences. Use modal verbs of desire.`
     } 
@@ -41,7 +43,7 @@ export async function POST(req: Request) {
       - The input should be related to travel, a desire to go somewhere or desire to experience something.
       - The input should be enough to allow the app to make recommendations.
 
-      If the conditions are unmet, stop completely. Just reply the following code:
+      If the conditions are unmet, stop completely. Strictly only reply the following code:
       { success: false, explanation: "", data: null }
 
       2. Find me three random travel destinations in the Philippines with that input. If there"s specific place mentioned in input, just search within that place.
