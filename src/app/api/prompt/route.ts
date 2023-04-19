@@ -43,14 +43,14 @@ export async function POST(req: Request) {
       - The input should be related to travel, a desire to go somewhere or desire to experience something.
       - The input should be enough to allow the app to make recommendations.
 
-      If the conditions are unmet, stop completely. Strictly only reply the following code:
-      { success: false, explanation: "", data: null }
+      If the conditions are unmet, stop completely. Do not provide explanations and only reply the following code:
+      { success: false, data: null }
 
       2. Find me three random travel destinations in the Philippines with that input. If there"s specific place mentioned in input, just search within that place.
 
       3. Expand by giving another list of best spots on each destinations. Give me three spots. Convince me why it"s perfect based on my input.
 
-      Strictly only answer with the following array of objects format:
+      Only answer with the following array of objects format:
       \`\`\`
       {
         success: true,
