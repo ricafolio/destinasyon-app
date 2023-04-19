@@ -23,7 +23,9 @@ export async function POST(req: Request) {
       temperature = 0.6
       chatPrompt = `You are thinking about your next dream trip.
 
-      Pick a super random, unusual outdoor activity. Pick a random location between Luzon, Visayas or Mindanao.
+      Pick a super random, unusual outdoor activity. 
+      
+      Pick a random setting. Avoid deserts or unsafe places.
 
       Write in first person POV. Maximum of 2 sentences. Use modal verbs of desire.`
     } 
@@ -35,7 +37,7 @@ export async function POST(req: Request) {
 
       temperature = 0.3
       role = "user"
-      chatPrompt = `You are an app that will find travel destinations in the Philippines based on this user input: "${prompt}"
+      chatPrompt = `You are an app that will find travel destinations in the world based on this user input: "${prompt}"
 
       1. To ensure that the app can provide the best travel destinations for the user, validate the input above with following conditions:
       - The input should be related to travel, a desire to go somewhere or desire to experience something.
@@ -44,9 +46,9 @@ export async function POST(req: Request) {
       If the conditions are unmet, stop completely. Just reply the following code:
       { success: false, data: null }
 
-      2. Find me three random travel destinations in the Philippines with that input. If there"s specific place mentioned in input, just search within that place.
+      2. Find me three random travel destinations in the world with that input. If there's specific place mentioned in input, just search within that place.
 
-      3. Expand by giving another list of best spots on each destinations. Give me three spots. Convince me why it"s perfect based on my input.
+      3. Expand by giving another list of best spots on each destinations. Give me three spots. Convince me why it's perfect based on my input.
 
       Strictly only answer with the following array of objects format:
       \`\`\`
