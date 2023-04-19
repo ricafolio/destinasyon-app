@@ -12,7 +12,7 @@ export default function Header() {
 
   return (
     <header className="flex flex-wrap p-4 w-full relative">
-      <div className={`${open ? '!block absolute z-1 right-4 top-16 w-60' : 'hidden sm:block pr-2'} w-2/6 sm:w-fit md:w-1/3 order-2 md:order-1 md:pr-0`}>
+      <div className={`${open ? 'absolute z-1 left-0 top-16' : 'hidden sm:block pr-2'} w-2/6 sm:w-fit md:w-1/3 order-2 md:order-1 pl-4 md:px-0 md:pr-0`}>
         <NavLink id="help" name="Help" link="/help" />
       </div>
 
@@ -28,7 +28,7 @@ export default function Header() {
         </div>
       </div>
 
-      <div className={`${open ? '!block absolute z-1 right-4 top-[6.5rem] w-60' : 'hidden sm:flex'} w-4/6 sm:w-fit md:w-1/3 order-3 flex justify-end`}>
+      <div className={`${open ? 'absolute z-1 right-0 top-16' : 'hidden sm:flex'} w-4/6 sm:w-fit md:w-1/3 order-3 flex justify-end pl-2 pr-4 md:px-0`}>
         <NavLink id="saved" name="Your saved destinations" link="/saved-destinations" />
       </div>
     </header>
